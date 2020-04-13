@@ -1,10 +1,16 @@
 <?php
   require_once('myModel.php');
-  
+  require_once('outils.php');
   session_start();
   
   // URL de redirection par défaut (si pas d'action ou action non reconnue)
   $url_redirect = "index.php";
+
+  function console_log( $data ){
+    echo '<script>';
+    echo 'console.log('. json_encode( $data ) .')';
+    echo '</script>';
+  }
   
   if (isset($_REQUEST['action'])) {
   
@@ -48,9 +54,8 @@
        
       } else if ($_REQUEST['action'] == 'sendmsg') {
           /* ======== MESSAGE ======== */
-          addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],$_REQUEST['sujet'],$_REQUEST['corps']);
+          addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],inputFilteur($_REQUEST['sujet']), inputFilteur($_REQUEST['corps']));
           $url_redirect = "vw_moncompte.php?msg_ok";
-              
       } else if ($_REQUEST['action'] == 'msglist') {
           /* ======== MESSAGE ======== */
           $_SESSION['messagesRecus'] = findMessagesInbox($_REQUEST["userid"]);
