@@ -59,7 +59,7 @@
       } else if ($_REQUEST['action'] == 'msglist') {
           /* ======== MESSAGE ======== */
           $_SESSION['messagesRecus'] = findMessagesInbox($_REQUEST["userid"]);
-          $url_redirect = "vw_messagerie.php";
+          $url_redirect = "views/vw_messagerie.php";
               
       } 
 
