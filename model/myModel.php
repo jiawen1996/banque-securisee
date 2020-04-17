@@ -2,7 +2,7 @@
 
 
 function getMySqliConnection() {
-  $db_connection_array = parse_ini_file("config/config.ini");
+  $db_connection_array = parse_ini_file("../config/config.ini");
   return new mysqli($db_connection_array['DB_HOST'], $db_connection_array['DB_USER'], $db_connection_array['DB_PASSWD'], $db_connection_array['DB_NAME']);
 }
 
@@ -13,12 +13,16 @@ function findUserByLoginPwd($login, $pwd) {
       echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
       $utilisateur = false;
   } else {
-      $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login' and mot_de_passe='$pwd'";
+      $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login' and pwd='$pwd'";
       if (!$result = $mysqli->query($req)) {
           echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
           $utilisateur = false;
       } else {
           if ($result->num_rows === 0) {
+
+            //test
+            echo 'unfound user';
+
             $utilisateur = false;
           } else {
             $utilisateur = $result->fetch_assoc();

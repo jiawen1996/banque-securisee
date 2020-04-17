@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Connexion</title>
-  <link rel="stylesheet" type="text/css" media="all"  href="css/mystyle.css" />
+  <link rel="stylesheet" type="text/css" media="all"  href="../css/mystyle.css" />
 </head>
 <body>
   <header>
@@ -13,7 +13,7 @@
   <section>
       <div class="login-page">
         <div class="form">
-            <form method="POST" action="myController.php">
+            <form method="POST" action="../controller/myController.php">
                 <input type="hidden" name="action" value="authenticate">
                 <input type="text" name="login" placeholder="login"/>
                 <input type="password" name="mdp" placeholder="mot de passe"/>

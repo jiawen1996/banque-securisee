@@ -7,13 +7,13 @@
 <head>
   <meta charset="utf-8">
   <title>Mon Compte</title>
-  <link rel="stylesheet" type="text/css" media="all"  href="css/mystyle.css" />
+  <link rel="stylesheet" type="text/css" media="all"  href="../css/mystyle.css" />
 </head>
 <body>
     <header>
-        <form method="POST" action="myController.php">
+        <form method="POST" action="../controller/myController.php">
             <input type="hidden" name="action" value="disconnect">
-            <input type="hidden" name="loginPage" value="vw_login.php?disconnect">
+            <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
             <button class="btn-logout form-btn">Déconnexion</button>
         </form>
         

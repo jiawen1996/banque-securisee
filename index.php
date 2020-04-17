@@ -4,9 +4,9 @@
   
   if(!isset($_SESSION["connected_user"]) || $_SESSION["connected_user"] == "") {
       // utilisateur non connect�
-      header('Location: connexion.php');      
+      header('Location: view/connexion.php');      
   } else {
-      header('Location: accueil.php');      
+      header('Location: view/accueil.php');      
   }
 
 ?>
