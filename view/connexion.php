@@ -13,8 +13,7 @@
   <section>
       <div class="login-page">
         <div class="form">
-            <form method="POST" action="../controller/myController.php">
-                <input type="hidden" name="action" value="authenticate">
+            <form method="POST" action="../controller/connexionController.php">
                 <input type="text" name="login" placeholder="login"/>
                 <input type="password" name="mdp" placeholder="mot de passe"/>
                 <button>login</button>
