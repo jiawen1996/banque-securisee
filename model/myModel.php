@@ -13,7 +13,7 @@ function findUserByLoginPwd($login, $pwd) {
       echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
       $utilisateur = false;
   } else {
-      $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login' and pwd='$pwd'";
+      $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login' and mot_de_passe='$pwd'";
       if (!$result = $mysqli->query($req)) {
           echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
           $utilisateur = false;

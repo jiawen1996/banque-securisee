@@ -5,7 +5,7 @@ GRANT ALL ON devoir_sr03.* TO 'sr03'@'localhost';
 CREATE TABLE users (
     id_user int AUTO_INCREMENT PRIMARY KEY,
     login varchar(20),
-    pwd varchar(20),
+    mot_de_passe varchar(20),
     nom varchar(20),
     prenom varchar(20),
     numero_compte varchar(20),
@@ -40,6 +40,6 @@ CREATE TABLE messages (
     FOREIGN KEY (id_user_from) REFERENCES users (id_user)
 );
 
-INSERT INTO users (login, pwd, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('annab','annab','client', 'anna', 'beral', '0001', 100);
-INSERT INTO users (login, pwd, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('davidd','davidd','employe', 'david', 'dupont', '0002', 100);
+INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('annab','annab','client', 'anna', 'beral', '0001', 100);
+INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('davidd','davidd','employe', 'david', 'dupont', '0002', 100);
 
