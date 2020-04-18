@@ -1,7 +1,7 @@
 <?php
   require_once('../model/myModel.php');
 //  require_once('../model/model.php');
-  require_once('../outils.php');
+  require_once('../outils_securite.php');
   session_start();
   
   // URL de redirection par défaut (si pas d'action ou action non reconnue)

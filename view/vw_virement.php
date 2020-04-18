@@ -1,5 +1,7 @@
 <?php
-session_start();
+    session_start();
+    require_once('../outils_securite.php');
+    interdireSansLogin();
 ?>
 
 <!doctype html>
@@ -11,7 +13,7 @@ session_start();
 </head>
 <body>
 <header>
-    <form method="POST" action="myController.php">
+    <form method="POST" action="../controller/myController.php">
         <input type="hidden" name="action" value="disconnect">
         <input type="hidden" name="loginPage" value="vw_login.php?disconnect">
         <button class="btn-logout form-btn">Déconnexion</button>
@@ -37,14 +39,24 @@ session_start();
     </article>
 
     <article>
-        <form method="POST" action="myController.php">
+        <form method="POST" action="../controller/virementController.php">
             <input type="hidden" name="action" value="transfert">
             <div class="fieldset">
                 <div class="fieldset_label">
                     <span>Transférer de l'argent</span>
                 </div>
                 <div class="field">
-                    <label>N° compte destinataire : </label><input type="text" size="20" name="destination">
+                    <label>N° compte destinataire : </label>
+                    <select name="destination">
+                        <?php
+                        foreach ($_SESSION['listeUsers'] as $id => $user) {
+                            $idUser = $_SESSION["connected_user"]['id_user'];
+                            if ($id != $_SESSION["connected_user"]["id_user"]){
+                                echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="field">
                     <label>Montant à transférer : </label><input type="text" size="10" name="montant">

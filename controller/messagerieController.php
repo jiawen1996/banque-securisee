@@ -1,6 +1,6 @@
 <?php
 require_once('../model/myModel.php');
-require_once('../outils.php');
+require_once('../outils_securite.php');
 session_start();
 
 function isDestEmploye($idDest) {
@@ -12,6 +12,8 @@ $url_redirect = "../index.php";
 if (isset($_REQUEST['action'])) {
     if ($_REQUEST['action'] == 'sendmsg') {
         /* ======== MESSAGE ======== */
+        //Si l'utilisateur est un employé  -> ok
+        //Sinon -> si la destination est un employé -> ok
         if ($_SESSION["profil_user"] == 'employe' || isDestEmploye($_REQUEST['to'])) {
             addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],inputFilteur($_REQUEST['sujet']), inputFilteur($_REQUEST['corps']));
             $url_redirect = "../view/vw_messagerie.php?msg_ok";
