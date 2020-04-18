@@ -1,5 +1,6 @@
 <?php
   require_once('../model/myModel.php');
+//  require_once('../model/model.php');
   require_once('../outils.php');
   session_start();
   

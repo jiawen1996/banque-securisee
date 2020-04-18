@@ -52,16 +52,7 @@
               $url_redirect = "../view/accueil.php?bad_mt=".$_REQUEST['montant'];
           }
        
-      } else if ($_REQUEST['action'] == 'sendmsg') {
-          /* ======== MESSAGE ======== */
-          addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],inputFilteur($_REQUEST['sujet']), inputFilteur($_REQUEST['corps']));
-          $url_redirect = "../view/accueil.php?msg_ok";
-      } else if ($_REQUEST['action'] == 'msglist') {
-          /* ======== MESSAGE ======== */
-          $_SESSION['messagesRecus'] = findMessagesInbox($_REQUEST["userid"]);
-          $url_redirect = "../view/vw_messagerie.php";
-              
-      } 
+      }
 
        
   }  

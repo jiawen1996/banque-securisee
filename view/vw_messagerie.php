@@ -11,9 +11,9 @@ session_start();
 </head>
 <body>
 <header>
-    <form method="POST" action="myController.php">
+    <form method="POST" action="../controller/myController.php">
         <input type="hidden" name="action" value="disconnect">
-        <input type="hidden" name="loginPage" value="vw_login.php?disconnect">
+        <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
         <button class="btn-logout form-btn">Déconnexion</button>
     </form>
 
@@ -23,7 +23,7 @@ session_start();
 <section>
 
     <article>
-        <form method="POST" action="myController.php">
+        <form method="POST" action="../controller/messagerieController.php">
             <input type="hidden" name="action" value="sendmsg">
             <div class="fieldset">
                 <div class="fieldset_label">
@@ -49,6 +49,8 @@ session_start();
                 <?php
                 if (isset($_REQUEST["msg_ok"])) {
                     echo '<p>Message envoyé avec succès.</p>';
+                } else {
+                    echo '<p>Vous ne pouvez envoyer un message qu\'à un employé.</p>';
                 }
                 ?>
                 <p><a href="myController.php?action=msglist&userid=<?php echo $_SESSION["connected_user"]["id_user"];?>" target="_blank">Mes messages reçus</a></p>
