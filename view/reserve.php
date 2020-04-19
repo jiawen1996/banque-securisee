@@ -1,17 +1,8 @@
-<?php
-require_once('../outils_securite.php');
-session_start();
-
-//Rediriger vers la page réservée si l'utilisateur n'est pas un employé
-reserverEmploye()
-
-?>
-
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Fiche client</title>
+    <title>Reserve</title>
     <link rel="stylesheet" type="text/css" media="all"  href="../css/mystyle.css" />
 </head>
 <body>
@@ -21,13 +12,20 @@ reserverEmploye()
         <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
         <button class="btn-logout form-btn">Déconnexion</button>
     </form>
-
-    <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Fiche client</h2>
+    <h2>ATTENTION !</h2>
 </header>
 
 <section>    
-    <!-- TODO : Afficher tous les clients -->
-    <!-- TODO : Afficher les informations d'un client sélectioné et un lien de virement -->
+    <article>
+        <div class="fieldset">
+            <div class="fieldset_label">
+                <span>Erreur</span>
+            </div>
+            <div class="field">
+                Vous n'avez pas droit à accéder à la page !
+            </div>
+        </div>
+    </article>
 
     <article>
         <div class="field">
