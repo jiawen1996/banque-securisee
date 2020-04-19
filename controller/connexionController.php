@@ -30,6 +30,11 @@ if (!isset($_REQUEST['login']) || !isset($_REQUEST['mdp']) || $_REQUEST['login']
     // authentification réussie
     $_SESSION["connected_user"] = $utilisateur;
     $_SESSION["listeUsers"] = findAllUsers();
+
+    // liste de clients à s'afficher dans ficheClient.php pour les employés
+    if ($utilisateur["profil_user"] == "employe") {
+      $_SESSION["listeClients"] = findAllClients();
+    }
     $url_redirect = "../view/accueil.php";
     }
     

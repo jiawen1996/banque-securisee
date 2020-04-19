@@ -48,13 +48,22 @@
                 <div class="field">
                     <label>N° compte destinataire : </label>
                     <select name="destination">
+                    
+                        <!-- Si la destination n'est pas encore prédéfinie, on affiche une liste déroulante pour choisir
+                            Sinon, on fixe la destination se trouvant dans $_SESSION['chosen_user']  -->
+
+                        <!-- RAISON SÉCURITÉE : il y a une seule destination si le site est dirigé depuis ficheClient.php -->
                         <?php
-                        foreach ($_SESSION['listeUsers'] as $id => $user) {
-                            $idUser = $_SESSION["connected_user"]['id_user'];
-                            if ($id != $_SESSION["connected_user"]["id_user"]){
-                                echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
+                            if (!isset($_SESSION['chosen_user'])) {
+                                foreach ($_SESSION['listeUsers'] as $id => $user) {
+                                    $idUser = $_SESSION["connected_user"]['id_user'];
+                                    if ($id != $_SESSION["connected_user"]["id_user"]){
+                                        echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
+                                    }
+                                }
+                            } else {
+                                echo '<option value="'.$_SESSION['chosen_user']['id_user'].'">'.$_SESSION['chosen_user']['nom'].' '.$_SESSION['chosen_user']['prenom'].'</option>';
                             }
-                        }
                         ?>
                     </select>
                 </div>

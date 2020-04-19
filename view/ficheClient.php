@@ -26,8 +26,43 @@ reserverEmploye()
 </header>
 
 <section>    
-    <!-- TODO : Afficher tous les clients -->
-    <!-- TODO : Afficher les informations d'un client sélectioné et un lien de virement -->
+    <!-- Liste de clients -->
+    <article>
+          <div class="fieldset">
+              <div class="fieldset_label">
+                  <span>Liste de clients</span>
+              </div>
+
+              <?php
+                    foreach ($_SESSION['listeClients'] as $id => $user) {
+                        echo '<div class="field"><form action="../controller/ficheClientController.php" method="POST"><button type="submit" name="id_client" value="' . $user['id_user'] . '">'. $user['nom'].' '.$user['prenom'];
+                        echo'</button></form></div>';
+                    }
+                ?>
+          </div>
+        </article>  
+
+    <!-- Afficher les informations d'un client sélectioné et un lien de virement -->
+    <?php
+        if (isset($_SESSION["chosen_user"]) && isset($_REQUEST["userfound"])) {
+            echo '<article><div class="fieldset"><div class="fieldset_label">';
+            echo '<span>Informations clientèlles</span><span><a href="ficheClient.php"><button>X</button></a></span></div>';
+            echo '<div class="field"><label>Nom : </label><span>' . $_SESSION['chosen_user']["nom"] . '</span></div>';
+            echo '<div class="field"><label>Prénom : </label><span>' . $_SESSION['chosen_user']["prenom"] . '</span></div>';
+            echo '<div class="field"><label>N° compte : </label><span>' . $_SESSION['chosen_user']["numero_compte"] . '</span></div>';
+            echo '<div class="field"><label>Solde : </label><span>' . $_SESSION['chosen_user']["solde_compte"] . '</span></div>';
+            echo '<div class="field"><label>Login : </label><span>' . $_SESSION['chosen_user']["login"] . '</span></div>';
+            
+            // numéro du compte de client se trouve dans $_SESSION["chosen_user"]["numero_compte"] est plus sécurité que le passe en URL
+            echo '<p><a href="vw_virement.php?def_destination" target="_blank">Virement à ' . $_SESSION['chosen_user']["nom"] . ' </a></p></div></article>';
+
+        }
+
+        if (isset($_REQUEST["badvalue"])) {
+            echo '<p class="errmsg">Le client sélectionné ne se trouve pas dans la base de données.</p>';
+        }
+
+    ?>
 
     <article>
         <div class="field">
@@ -36,6 +71,5 @@ reserverEmploye()
     </article>
 
 </section>
-
 </body>
 </html>
