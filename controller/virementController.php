@@ -8,7 +8,7 @@ function isConnectedUser () {
 }
 // URL de redirection par défaut (si pas d'action ou action non reconnue)
 $url_redirect = "../index.php";
-if (isset($_REQUEST['action']) && isset($_SESSION["connected_user"])) {
+if (isset($_REQUEST['action']) && isAuthentificated()) {
     if ($_REQUEST['action'] == 'transfert') {
         /* ======== TRANSFERT ======== */
         if (is_numeric ($_REQUEST['montant'])) {

@@ -1,0 +1,8 @@
+AuthUserFile /usr/local/etc/.htpasswd
+AuthName "sr03"
+AuthType Basic
+<Limit GET POST>
+require user sr03
+</Limit>
+
+
