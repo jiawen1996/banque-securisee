@@ -8,18 +8,18 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Mon Compte</title>
+    <title>Virement</title>
     <link rel="stylesheet" type="text/css" media="all"  href="../css/mystyle.css" />
 </head>
 <body>
 <header>
     <form method="POST" action="../controller/myController.php">
         <input type="hidden" name="action" value="disconnect">
-        <input type="hidden" name="loginPage" value="vw_login.php?disconnect">
+        <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
         <button class="btn-logout form-btn">Déconnexion</button>
     </form>
 
-    <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Mon compte</h2>
+    <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Virement</h2>
 </header>
 
 <section>
@@ -73,6 +73,13 @@
             </div>
         </form>
     </article>
+
+    <article>
+        <div class="field">
+            <button class="btn-logout form-btn" onclick="location.href='accueil.php'">Retour vers Mon Compte</button>
+        </div>
+    </article>
+    
 
 </section>
 

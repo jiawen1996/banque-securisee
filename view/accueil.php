@@ -61,6 +61,27 @@ interdireSansLogin();
         </article>
         
         <article>
+          <div class="fieldset">
+              <div class="fieldset_label">
+                  <span>Vos activités</span>
+              </div>
+              <div class="field">
+                <button onclick="location.href='vw_virement.php'">Effectuer un virement</button>
+              </div>
+              <div class="field">
+                <button onclick="location.href='vw_messagerie.php'">Messagerie</button>
+              </div>
+              <?php
+              if ($_SESSION["connected_user"]["profil_user"] == "employe") {
+                echo("<div class=\"field\"><button onclick=\"location.href='ficheClient.php'\">Fiche client</button></div>"); 
+              }
+              ?>
+          </div>
+        </article>
+
+        <!-- TRANSFÉRER DE L'ARGENT -->
+<!--         
+        <article>
         <form method="POST" action="myController.php">
           <input type="hidden" name="action" value="transfert">
           <div class="fieldset">
@@ -86,8 +107,40 @@ interdireSansLogin();
         </form>
         </article>
         
-
-        
+        <article>
+        <form method="POST" action="myController.php">
+          <input type="hidden" name="action" value="sendmsg">
+          <div class="fieldset">
+              <div class="fieldset_label">
+                  <span>Envoyer un message</span>
+              </div>
+              <div class="field">
+                  <label>Destinataire : </label>
+                  <select name="to">
+                    <?php
+                    foreach ($_SESSION['listeUsers'] as $id => $user) {
+                      echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
+                    }
+                    ?>
+                  </select>
+              </div>
+              <div class="field">
+                  <label>Sujet : </label><input type="text" size="20" name="sujet">
+              </div>
+              <div class="field">
+                  <label>Message : </label><input type="text" size="40" name="corps">
+              </div>
+              <button class="form-btn">Envoyer</button>
+              <?php
+              if (isset($_REQUEST["msg_ok"])) {
+                echo '<p>Message envoyé avec succès.</p>';
+              }
+              ?>
+              <p><a href="myController.php?action=msglist&userid=<?php echo $_SESSION["connected_user"]["id_user"];?>" target="_blank">Mes messages reçus</a></p>
+          </div>
+        </form>
+        </article>
+         -->
     </section>
 
 </body>

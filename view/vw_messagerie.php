@@ -8,7 +8,7 @@ interdireSansLogin();
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Mon Compte</title>
+    <title>Messagerie</title>
     <link rel="stylesheet" type="text/css" media="all"  href="../css/mystyle.css" />
 </head>
 <body>
@@ -19,7 +19,7 @@ interdireSansLogin();
         <button class="btn-logout form-btn">Déconnexion</button>
     </form>
 
-    <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Mon compte</h2>
+    <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Messagerie</h2>
 </header>
 
 <section>
@@ -58,6 +58,12 @@ interdireSansLogin();
                 <p><a href="myController.php?action=msglist&userid=<?php echo $_SESSION["connected_user"]["id_user"];?>" target="_blank">Mes messages reçus</a></p>
             </div>
         </form>
+    </article>
+
+    <article>
+        <div class="field">
+            <button class="btn-logout form-btn" onclick="location.href='accueil.php'">Retour vers Mon Compte</button>
+        </div>
     </article>
 
 </section>
