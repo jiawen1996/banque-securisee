@@ -57,6 +57,27 @@
         </article>
         
         <article>
+          <div class="fieldset">
+              <div class="fieldset_label">
+                  <span>Vos activités</span>
+              </div>
+              <div class="field">
+                <button onclick="location.href='vw_virement.php'">Effectuer un virement</button>
+              </div>
+              <div class="field">
+                <button onclick="location.href='vw_messagerie.php'">Messagerie</button>
+              </div>
+              <?php
+              if ($_SESSION["connected_user"]["profil_user"] == "employe") {
+                echo("<div class=\"field\"><button onclick=\"location.href='ficheClient.php'\">Fiche client</button></div>"); 
+              }
+              ?>
+          </div>
+        </article>
+
+        <!-- TRANSFÉRER DE L'ARGENT -->
+<!--         
+        <article>
         <form method="POST" action="myController.php">
           <input type="hidden" name="action" value="transfert">
           <div class="fieldset">
@@ -115,7 +136,7 @@
           </div>
         </form>
         </article>
-        
+         -->
     </section>
 
 </body>
