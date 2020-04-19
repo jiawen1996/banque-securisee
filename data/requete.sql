@@ -42,4 +42,5 @@ CREATE TABLE messages (
 
 INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('annab','annab','client', 'anna', 'beral', '0001', 100);
 INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('davidd','davidd','employe', 'david', 'dupont', '0002', 100);
+INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('beanj','beanj','employe', 'bean', 'jackson', '0003', 100);
 
