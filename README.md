@@ -50,3 +50,4 @@ https://www.whoishostingthis.com/resources/htaccess/
 
 ### Contrôle 
 
+http://localhost:8888/banque-securisee/controller/myController.php?action=disconnect&loginPage=http://www.google.com

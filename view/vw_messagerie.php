@@ -55,7 +55,7 @@ interdireSansLogin();
                     echo '<p>Vous ne pouvez envoyer un message qu\'à un employé.</p>';
                 }
                 ?>
-                <p><a href="myController.php?action=msglist&userid=<?php echo $_SESSION["connected_user"]["id_user"];?>" target="_blank">Mes messages reçus</a></p>
+                <p><a href="../controller/messagerieController.php?action=msglist&userid=<?php echo $_SESSION["connected_user"]["id_user"];?>" target="_blank">Mes messages reçus</a></p>
             </div>
         </form>
     </article>

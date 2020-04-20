@@ -62,9 +62,10 @@
                     <select name="destination">
                         <?php
                             foreach ($_SESSION['listeUsers'] as $id => $user) {
+                                //Un client ne peut effectuer un virement que de son compte vers un autre compte (protection coté front-end)
                                 $idUser = getUser()['id_user'];
                                 if ($id != $idUser){
-                                        echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
+                                        echo '<option value="'.$user['numero_compte'].'">'.$user['nom'].' '.$user['prenom'].'</option>';
                                 }
                             }
                         ?>
