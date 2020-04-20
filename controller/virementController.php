@@ -1,5 +1,5 @@
 <?php
-require_once('../model/myModel.php');
+require_once('../model/virementModel.php');
 require_once('../outils_securite.php');
 session_start();
 
@@ -19,14 +19,17 @@ if ( isAuthentificated()) {
         * Sinon, on met le numéro de compte de l'utilisateur connecté à la place du numéro compte de source 
         */
         if (!isset($_SESSION["chosen_user"])){
-            transfert($_REQUEST['destination'],$_SESSION["connected_user"]["numero_compte"], $_REQUEST['montant']);
-            $_SESSION["connected_user"]["solde_compte"] = $_SESSION["connected_user"]["solde_compte"] -  $_REQUEST['montant'];
+            $src = &$_SESSION["connected_user"];
         } else {
-            transfert($_REQUEST['destination'],$_SESSION["chosen_user"]["numero_compte"], $_REQUEST['montant']);
-            $_SESSION["chosen_user"]["solde_compte"] = $_SESSION["chosen_user"]["solde_compte"] -  $_REQUEST['montant'];
+            $src = &$_SESSION["chosen_user"];
         }
-        
-        $url_redirect = "../view/vw_virement.php?trf_ok";
+        if(!transfert($_REQUEST['destination'],$src["numero_compte"], $_REQUEST['montant'], $_REQUEST['passwordTransfert'])) {
+            $url_redirect = "../view/vw_virement.php?bad_pwd";
+        } else {
+            $src["solde_compte"] = $src["solde_compte"] -  $_REQUEST['montant'];
+            $url_redirect = "../view/vw_virement.php?trf_ok";
+        }
+        unset($src);
 
     } else {
         $url_redirect = "../view/vw_virement.php?bad_mt=".$_REQUEST['montant'];

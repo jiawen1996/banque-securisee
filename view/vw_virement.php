@@ -75,13 +75,17 @@
                     <label>Montant à transférer : </label><input type="text" size="10" name="montant">
                     <!-- TODO : input récupéré le montant à traiter dans le form -->
                 </div>
+                <div class="field">
+                    <label>Mot de passe : </label><input type="password" name="passwordTransfert" placeholder="mot de passe de virement" />
+                </div>
                 <button class="form-btn">Transférer</button>
                 <?php
                 if (isset($_REQUEST["trf_ok"])) {
                     echo '<p>Virement effectué avec succès.</p>';
-                }
-                if (isset($_REQUEST["bad_mt"])) {
+                } else if (isset($_REQUEST["bad_mt"])) {
                     echo '<p>Le montant saisi est incorrect : '.$_REQUEST["bad_mt"].'</p>';
+                } else if (isset($_REQUEST["bad_pwd"])) {
+                    echo '<p>Le mot de passe de virement n\'est pas correct</p>';
                 }
                 ?>
             </div>
