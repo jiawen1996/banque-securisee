@@ -1,5 +1,5 @@
 <?php
-require_once('../outils_securite.php');
+require_once('outils_model.php');
 require_once('dbConnexion.php');
 
 /**
@@ -14,7 +14,9 @@ function findUserByLoginPwd($login, $pwd) {
     } else {
         // Récupérer hashedPwd depuis la BD
         $realHashedPwd = getHashedPwd($login, $mysqli);
+        
         if (isset($realHashedPwd)) {
+          
             //Si le mot de passe est correct, continuer à récupérer des infos de cet utilisateur
             if (password_verify($pwd, $realHashedPwd)) {
                 $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login'";

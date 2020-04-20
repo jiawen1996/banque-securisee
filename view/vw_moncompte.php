@@ -1,6 +1,6 @@
 <?php
   session_start();
-require_once('../outils_securite.php');
+require_once('../outils_controller.php');
 interdireSansLogin();
 ?>
 

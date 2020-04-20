@@ -1,6 +1,6 @@
 <?php
-  require_once('../outils_securite.php');
-  require_once('../model/usersManager.php');
+  require_once('../outils_controller.php');
+  require_once('../model/usersModel.php');
   session_start();
   
   // URL de redirection par défaut (si pas d'action ou action non reconnue)

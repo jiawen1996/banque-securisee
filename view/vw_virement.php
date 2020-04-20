@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once('../outils_securite.php');
+    require_once('../outils_controller.php');
     interdireSansLogin();
 
     /*
@@ -73,7 +73,7 @@
                 </div>
                 <div class="field">
                     <label>Montant à transférer : </label><input type="text" size="10" name="montant">
-                    <!-- TODO : input récupéré le montant à traiter dans le form -->
+                    <!-- TODO : input caché récupéré le montant à traiter dans le form -->
                 </div>
                 <div class="field">
                     <label>Mot de passe : </label><input type="password" name="passwordTransfert" placeholder="mot de passe de virement" />
