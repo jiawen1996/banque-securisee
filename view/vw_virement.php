@@ -2,6 +2,19 @@
     session_start();
     require_once('../outils_securite.php');
     interdireSansLogin();
+
+    /*
+    * Si la page virement est ouvert à l'aide du lien de virement dans la page fiche client
+    * il signifie qu'il y a un client sélenctioné dans la session et on affiche les informations du compte de ce client.
+    * Sinon, on affiche les informations du compte de l'utilisateur connecté 
+    */
+    function getUser() {
+        if ( isset($_SESSION["chosen_user"])) {
+            return $_SESSION["chosen_user"];
+        } else {
+            return $_SESSION["connected_user"];
+        }
+    }
 ?>
 
 <!doctype html>
@@ -19,7 +32,7 @@
         <button class="btn-logout form-btn">Déconnexion</button>
     </form>
 
-    <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Virement</h2>
+    <h2><?php echo getUser()["prenom"];?> <?php echo getUser()["nom"];?> - Virement</h2>
 </header>
 
 <section>
@@ -30,17 +43,16 @@
                 <span>Votre compte</span>
             </div>
             <div class="field">
-                <label>N° compte : </label><span><?php echo $_SESSION["connected_user"]["numero_compte"];?></span>
+                <label>N° compte : </label><span><?php echo getUser()["numero_compte"];?></span>
             </div>
             <div class="field">
-                <label>Solde : </label><span><?php echo $_SESSION["connected_user"]["solde_compte"];?> &euro;</span>
+                <label>Solde : </label><span><?php echo getUser()["solde_compte"];?> &euro;</span>
             </div>
         </div>
     </article>
 
     <article>
         <form method="POST" action="../controller/virementController.php">
-            <input type="hidden" name="action" value="transfert">
             <div class="fieldset">
                 <div class="fieldset_label">
                     <span>Transférer de l'argent</span>
@@ -48,27 +60,19 @@
                 <div class="field">
                     <label>N° compte destinataire : </label>
                     <select name="destination">
-                    
-                        <!-- Si la destination n'est pas encore prédéfinie, on affiche une liste déroulante pour choisir
-                            Sinon, on fixe la destination se trouvant dans $_SESSION['chosen_user']  -->
-
-                        <!-- RAISON SÉCURITÉE : il y a une seule destination si le site est dirigé depuis ficheClient.php -->
                         <?php
-                            if (!isset($_SESSION['chosen_user'])) {
-                                foreach ($_SESSION['listeUsers'] as $id => $user) {
-                                    $idUser = $_SESSION["connected_user"]['id_user'];
-                                    if ($id != $_SESSION["connected_user"]["id_user"]){
+                            foreach ($_SESSION['listeUsers'] as $id => $user) {
+                                $idUser = getUser()['id_user'];
+                                if ($id != $idUser){
                                         echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
-                                    }
                                 }
-                            } else {
-                                echo '<option value="'.$_SESSION['chosen_user']['id_user'].'">'.$_SESSION['chosen_user']['nom'].' '.$_SESSION['chosen_user']['prenom'].'</option>';
                             }
                         ?>
                     </select>
                 </div>
                 <div class="field">
                     <label>Montant à transférer : </label><input type="text" size="10" name="montant">
+                    <!-- TODO : input récupéré le montant à traiter dans le form -->
                 </div>
                 <button class="form-btn">Transférer</button>
                 <?php

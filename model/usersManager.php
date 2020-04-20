@@ -42,7 +42,7 @@ function findUserById($id) {
       echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
       $utilisateur = false;
   } else {
-      $req="select nom,prenom,login, numero_compte,profil_user,solde_compte from users where id_user='$id' and profil_user='client'";
+      $req="select nom,prenom,login, numero_compte,profil_user,solde_compte, id_user from users where id_user='$id' and profil_user='client'";
       if (!$result = $mysqli->query($req)) {
           echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
           $utilisateur = false;

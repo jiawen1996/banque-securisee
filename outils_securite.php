@@ -17,8 +17,10 @@ function interdireSansLogin() {
     }
 }
 
-// REDIRIGER VERS LA PAGE DE MESSAGE D'ERREUR 
-// SI L'UTILISATEUR VEUX ACCÉDER AUX PAGES RÉSERVÉES POUR LES EMPLOYÉS
+/*
+* REDIRIGER VERS LA PAGE DE MESSAGE D'ERREUR 
+* SI L'UTILISATEUR VEUX ACCÉDER AUX PAGES RÉSERVÉES POUR LES EMPLOYÉS
+*/
 function reserverEmploye() {
     if (!isAuthentificated()) {
         header('Location: /banque-securisee/view/connexion.php');
@@ -28,6 +30,19 @@ function reserverEmploye() {
             $url_redirect = "../view/reserve.php";
             header("Location: $url_redirect");
         }
+    }
+}
+
+/*
+* LORSQUE L'EMPLOYÉ RETOURNE DEPUIS LA PAGE VIREMENT D'UN CLIENT
+* IL FAUT RAFRAICHIR SON SESSION EN SUPPRIMANT $_SESSION["chosen_user"]
+*/
+function deleteChosenUser() {
+    if (isset($_SESSION["chosen_user"])) {
+        print_r($_SESSION["chosen_user"]);
+        unset($_SESSION["chosen_user"]);
+        echo 'supprimer chosen_user';
+        print_r($_SESSION["chosen_user"]);
     }
 }
 

@@ -2,6 +2,8 @@
 session_start();
 require_once('../outils_securite.php');
 interdireSansLogin();
+deleteChosenUser();
+
 ?>
 
 <!doctype html>

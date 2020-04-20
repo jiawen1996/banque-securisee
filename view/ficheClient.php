@@ -1,9 +1,7 @@
 <?php
 require_once('../outils_securite.php');
 session_start();
-
-//Rediriger vers la page réservée si l'utilisateur n'est pas un employé
-reserverEmploye()
+reserverEmploye();
 
 ?>
 
@@ -54,7 +52,7 @@ reserverEmploye()
             echo '<div class="field"><label>Login : </label><span>' . $_SESSION['chosen_user']["login"] . '</span></div>';
             
             // numéro du compte de client se trouve dans $_SESSION["chosen_user"]["numero_compte"] est plus sécurité que le passe en URL
-            echo '<p><a href="vw_virement.php?def_destination" target="_blank">Virement à ' . $_SESSION['chosen_user']["nom"] . ' </a></p></div></article>';
+            echo '<p><a href="vw_virement.php" target="_blank">Virement en tant que ' . $_SESSION['chosen_user']["nom"] . ' </a></p></div></article>';
 
         }
 
