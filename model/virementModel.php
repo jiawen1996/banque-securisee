@@ -5,14 +5,15 @@ function verifierMdp() {
 
 }
 
-function transfert($dest, $src, $mt, $pwdTransfert) {
+function transfert($dest, $src, $mt, $pwdTransfert, $realisateur) {
     $mysqli = getMySqliConnection();
 
     if ($mysqli->connect_error) {
         echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
         $utilisateur = false;
     } else {
-        $realHashedPwd = getHashedPwdTransfert($src, $mysqli);
+        $realHashedPwd = getHashedPwdTransfert($realisateur, $mysqli);
+        
         if (password_verify($pwdTransfert, $realHashedPwd)) {
             $req="update users set solde_compte=solde_compte+$mt where numero_compte='$dest'";
             if (!$result = $mysqli->query($req)) {

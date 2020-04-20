@@ -23,7 +23,7 @@ if ( isAuthentificated()) {
         } else {
             $src = &$_SESSION["chosen_user"];
         }
-        if(!transfert($_REQUEST['destination'],$src["numero_compte"], $_REQUEST['montant'], $_REQUEST['passwordTransfert'])) {
+        if(!transfert($_REQUEST['destination'],$src["numero_compte"], $_REQUEST['montant'], $_REQUEST['passwordTransfert'], $_SESSION["connected_user"]["numero_compte"])) {
             $url_redirect = "../view/vw_virement.php?bad_pwd";
         } else {
             $src["solde_compte"] = $src["solde_compte"] -  $_REQUEST['montant'];
