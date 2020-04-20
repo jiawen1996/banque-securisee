@@ -51,3 +51,21 @@ https://www.whoishostingthis.com/resources/htaccess/
 ### Contrôle 
 
 http://localhost:8888/banque-securisee/controller/myController.php?action=disconnect&loginPage=http://www.google.com
+
+
+
+
+
+### Chiffrer mot de passe
+
+1. Pour chiffrer mot de passe et le stocker dans la BD
+
+   Aller https://www.jdoodle.com/php-online-editor/ pour générer hashedPwd avec la fonction 
+
+   ```php
+   <?php
+   echo password_hash("<mot_de_passe>", PASSWORD_DEFAULT);
+   ?>
+   ```
+
+2. Changer ton `mot_de_passe` correspondant dans la BD avec phpmyadmin

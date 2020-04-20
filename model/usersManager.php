@@ -1,5 +1,5 @@
 <?php
-
+require_once('../outils_securite.php');
 require_once('dbConnexion.php');
 
 /**
@@ -12,18 +12,28 @@ function findUserByLoginPwd($login, $pwd) {
         echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
         $utilisateur = false;
     } else {
-        $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login' and mot_de_passe='$pwd'";
-        if (!$result = $mysqli->query($req)) {
-            echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
-            $utilisateur = false;
-        } else {
-            if ($result->num_rows === 0) {
-  
-              $utilisateur = false;
+        // Récupérer hashedPwd depuis la BD
+        $realHashedPwd = getHashedPwd($login, $mysqli);
+        if (isset($realHashedPwd)) {
+            //Si le mot de passe est correct, continuer à récupérer des infos de cet utilisateur
+            if (password_verify($pwd, $realHashedPwd)) {
+                $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login'";
+                if (!$result = $mysqli->query($req)) {
+                    echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
+                    $utilisateur = false;
+                } else {
+                    if ($result->num_rows === 0) {
+                      $utilisateur = false;
+                    } else {
+                      $utilisateur = $result->fetch_assoc();
+                    }
+                    $result->free();
+                }
             } else {
-              $utilisateur = $result->fetch_assoc();
+                $utilisateur = false;
             }
-            $result->free();
+        } else {
+            $utilisateur = false;
         }
         $mysqli->close();
     }
