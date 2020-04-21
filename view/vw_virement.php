@@ -26,7 +26,7 @@
 </head>
 <body>
 <header>
-    <form method="POST" action="../controller/myController.php">
+    <form method="POST" action="../controller/disconnexionController.php">
         <input type="hidden" name="action" value="disconnect">
         <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
         <button class="btn-logout form-btn">Déconnexion</button>
@@ -73,7 +73,6 @@
                 </div>
                 <div class="field">
                     <label>Montant à transférer : </label><input type="text" size="10" name="montant">
-                    <!-- TODO : input caché récupéré le montant à traiter dans le form -->
                 </div>
                 <div class="field">
                     <label>Mot de passe : </label><input type="password" name="passwordTransfert" placeholder="mot de passe de virement" />

@@ -14,7 +14,7 @@ reserverEmploye();
 </head>
 <body>
 <header>
-    <form method="POST" action="../controller/myController.php">
+    <form method="POST" action="../controller/disconnexionController.php">
         <input type="hidden" name="action" value="disconnect">
         <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
         <button class="btn-logout form-btn">Déconnexion</button>
