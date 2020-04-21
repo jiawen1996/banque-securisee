@@ -36,7 +36,16 @@ interdireSansLogin();
                     <select name="to">
                         <?php
                         foreach ($_SESSION['listeUsers'] as $id => $user) {
-                            echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
+
+                            // un client ne peut qu'envoyer un message à un employé
+                            if ($_SESSION["connected_user"]["profil_user"] == "client" && $user["profil_user"] == "client" ) {
+                                continue;
+                            }
+
+                            // l'utilisateur ne peut pas envoyer à lui-même
+                            if ($id != $_SESSION["connected_user"]["id_user"]){
+                                echo '<option value="'.$id.'">'.$user['nom'].' '.$user['prenom'].'</option>';
+                            }
                         }
                         ?>
                     </select>
@@ -51,8 +60,10 @@ interdireSansLogin();
                 <?php
                 if (isset($_REQUEST["msg_ok"])) {
                     echo '<p>Message envoyé avec succès.</p>';
-                } else {
-                    echo '<p>Vous ne pouvez envoyer un message qu\'à un employé.</p>';
+                } 
+                
+                if (isset($_REQUEST["msg_fail"])){
+                    echo '<p>Envoie de message échoué. </p>';
                 }
                 ?>
                 <p><a href="../controller/messagerieController.php?action=msglist&userid=<?php echo $_SESSION["connected_user"]["id_user"];?>" target="_blank">Mes messages reçus</a></p>

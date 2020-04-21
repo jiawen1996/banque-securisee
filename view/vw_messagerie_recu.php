@@ -7,30 +7,43 @@ interdireSansLogin();
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>Messages</title>
-  <link rel="stylesheet" type="text/css" media="all"  href="/sr03/public/css/mystyle.css" />
+    <meta charset="utf-8">
+    <title>Boite réception</title>
+    <link rel="stylesheet" type="text/css" media="all"  href="../css/mystyle.css" />
 </head>
 <body>
-
-  <main>
+  <header>
+        <form method="POST" action="../controller/disconnexionController.php">
+            <input type="hidden" name="action" value="disconnect">
+            <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
+            <button class="btn-logout form-btn">Déconnexion</button>
+        </form>
+        
+        <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Boite réception</h2>
+  </header>
+  <section>
+    <?php
+      foreach ($_SESSION['messagesRecus'] as $cle => $message) {
+        echo '<acticle><div class="fieldset">';
+        echo '<div class="fieldset_label">';
+        echo '<span> Message </span>';
+        echo '</div>';
+        echo '<div class="field">';
+        echo '<label">Expédicteur : </label><span>'. $message['nom'].' '.$message['prenom'] . '</span>';
+        echo '</div>';
+        echo '<div class="field">';
+        echo '<label">Sujet : </label><span>'.  $message['sujet_msg'] . '</span>';
+        echo '</div>';
+        echo '<div class="field">';
+        echo '<label>Message : </label><span>'. $message['corps_msg'].'</span>';
+        echo '</div></div></article>';
+      }
+    ?>
     <article>
-      <div class="liste">
-        <h3><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Messages reçus</h3>
-        <table>
-          <?php
-          foreach ($_SESSION['messagesRecus'] as $cle => $message) {
-            echo '<tr>';
-            echo '<td>'.$message['nom'].' '.$message['prenom'].'</td>';
-            echo '<td>'.$message['sujet_msg'].'</td>';
-            echo '<td>'.$message['corps_msg'].'</td>';
-            echo '</tr>';
-          }
-           ?>
-        </table>
-      </div>
-
+        <div class="field">
+            <button class="btn-logout form-btn" onclick="location.href='accueil.php'">Retour vers Mon Compte</button>
+        </div>
     </article>
-  </main>
+  </section>
 </body>
 </html>

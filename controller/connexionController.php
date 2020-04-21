@@ -29,9 +29,9 @@ if (!isset($_REQUEST['login']) || !isset($_REQUEST['mdp']) || $_REQUEST['login']
     } else {
     // authentification réussie
     $_SESSION["connected_user"] = $utilisateur;
-    $_SESSION["listeUsers"] = findAllUsers();
+    $_SESSION["listeUsers"] = findAllUsers(); 
 
-    // liste de clients à s'afficher dans ficheClient.php pour les employés
+    // liste de clients contenant tous les informations de client à s'afficher dans ficheClient.php pour les employés
     if ($utilisateur["profil_user"] == "employe") {
       $_SESSION["listeClients"] = findAllClients();
     }
