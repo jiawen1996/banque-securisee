@@ -33,6 +33,7 @@ function findUserByLoginPwd($login, $pwd) {
                 $utilisateur = false;
               } else {
                 $utilisateur = $result->fetch_assoc();
+                $result->free();
               }
 
               $stmt->close();
@@ -72,6 +73,7 @@ function findUserById($id) {
           $utilisateur = false;
         } else {
           $utilisateur = $result->fetch_assoc();
+          $result->free();
         }
         $stmt->close();
       }
@@ -154,6 +156,7 @@ function getHashedPwd ($login, $mysqli) {
       
       if($result->num_rows != 0) {
           $realHashedPwd = $result->fetch_assoc()['mot_de_passe'];
+          $result->free();
       }
       $stmt->close();
   }
@@ -180,6 +183,7 @@ function getHashedPwdTransfert ($numeroCompte, $mysqli) {
       
       if($result->num_rows != 0) {
           $realHashedPwd = $result->fetch_assoc()['mot_de_passe_virement'];
+          $result->free();
       }
       $stmt->close();
   }
