@@ -1,5 +1,4 @@
 <?php
-require_once('outils_model.php');
 require_once('dbConnexion.php');
 
 /**
@@ -18,26 +17,30 @@ function findUserByLoginPwd($login, $pwd) {
         if (isset($realHashedPwd)) {
           
             //Si le mot de passe est correct, continuer à récupérer des infos de cet utilisateur
-            if (password_verify($pwd, $realHashedPwd)) {
-                $req="select nom,prenom,login,id_user,numero_compte,profil_user,solde_compte from users where login='$login'";
-                if (!$result = $mysqli->query($req)) {
-                    echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
-                    $utilisateur = false;
-                } else {
-                    if ($result->num_rows === 0) {
-                      $utilisateur = false;
-                    } else {
-                      $utilisateur = $result->fetch_assoc();
-                    }
-                    $result->free();
-                }
+          if (password_verify($pwd, $realHashedPwd)) {
+            $req = "SELECT nom,prenom,login,id_user,numero_compte,profil_user,solde_compte FROM users WHERE login= ?";
+            $stmt = $mysqli->prepare($req);
+
+            if  (!$stmt) {
+              echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
+              $utilisateur = false;
             } else {
+              $stmt->bind_param("s", $login);
+              $stmt->execute();
+              $result = $stmt->get_result();
+              
+              if($result->num_rows === 0) {
                 $utilisateur = false;
+              } else {
+                $utilisateur = $result->fetch_assoc();
+              }
+
+              $stmt->close();
             }
-        } else {
-            $utilisateur = false;
-        }
-        $mysqli->close();
+            
+          } 
+        } 
+      $mysqli->close();
     }
   
     return $utilisateur;
@@ -54,19 +57,25 @@ function findUserById($id) {
       echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
       $utilisateur = false;
   } else {
-      $req="select nom,prenom,login, numero_compte,profil_user,solde_compte, id_user from users where id_user='$id' and profil_user='client'";
-      if (!$result = $mysqli->query($req)) {
-          echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
-          $utilisateur = false;
-      } else {
-          if ($result->num_rows === 0) {
+      $req="SELECT nom,prenom,login, numero_compte,profil_user,solde_compte, id_user FROM users WHERE id_user= ? AND profil_user='client'";
+      $stmt = $mysqli->prepare($req);
 
-            $utilisateur = false;
-          } else {
-            $utilisateur = $result->fetch_assoc();
-          }
-          $result->free();
+      if  (!$stmt) {
+        echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
+        $utilisateur = false;
+      } else {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if($result->num_rows === 0) {
+          $utilisateur = false;
+        } else {
+          $utilisateur = $result->fetch_assoc();
+        }
+        $stmt->close();
       }
+
       $mysqli->close();
   }
 
@@ -85,7 +94,7 @@ function findUserById($id) {
     if ($mysqli->connect_error) {
         echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
     } else {
-        $req="select nom,prenom,login,id_user,numero_compte  from users";
+        $req="SELECT nom,prenom,login,id_user,numero_compte FROM users";
         if (!$result = $mysqli->query($req)) {
             echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
         } else {
@@ -101,7 +110,7 @@ function findUserById($id) {
   }
 
 
-  /**
+/**
  * Récupérer les informations des clients
  */
   function findAllClients() {
@@ -112,7 +121,7 @@ function findUserById($id) {
     if ($mysqli->connect_error) {
         echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
     } else {
-        $req="select id_user, nom, prenom, login, numero_compte, solde_compte from users where profil_user='client'";
+        $req="SELECT id_user, nom, prenom, login, numero_compte, solde_compte FROM users WHERE profil_user='client'";
         if (!$result = $mysqli->query($req)) {
             echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
         } else {
@@ -126,5 +135,57 @@ function findUserById($id) {
   
     return $listeClients;
   }
+
+/*
+* Récupérer hashedPwd de colonne mot_de_passe depuis la BD qui est chiffré par password_hash
+* en utilisant l'algo de PASSWORD_DEFAULT
+*/
+function getHashedPwd ($login, $mysqli) {
+  $realHashedPwd = null;
+  $req="SELECT mot_de_passe FROM users WHERE login=?";
+  $stmt = $mysqli->prepare($req);
+
+  if  (!$stmt) {
+      echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
+  } else {
+      $stmt->bind_param("s", $login);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      
+      if($result->num_rows != 0) {
+          $realHashedPwd = $result->fetch_assoc()['mot_de_passe'];
+      }
+      $stmt->close();
+  }
+  
+  return $realHashedPwd;
+}
+
+
+/*
+* Récupérer hashedPwd de colonne mot_de_passe_virement depuis la BD qui est chiffré par password_hash
+* en utilisant l'algo de PASSWORD_DEFAULT
+*/
+function getHashedPwdTransfert ($numeroCompte, $mysqli) {
+  $realHashedPwd = null;
+  $req="SELECT mot_de_passe_virement FROM users WHERE numero_compte=?";
+  $stmt = $mysqli->prepare($req);
+
+  if  (!$stmt) {
+      echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
+  } else {
+      $stmt->bind_param("s", $numeroCompte);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      
+      if($result->num_rows != 0) {
+          $realHashedPwd = $result->fetch_assoc()['mot_de_passe_virement'];
+      }
+      $stmt->close();
+  }
+  
+  return $realHashedPwd;
+}
+
 
 ?>

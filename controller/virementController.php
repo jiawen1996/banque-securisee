@@ -11,7 +11,7 @@ $url_redirect = "../index.php";
 
 /* ======== TRANSFERT ======== */
 if ( isAuthentificated()) {
-    if (is_numeric ($_REQUEST['montant'])) {
+    if (is_numeric($_REQUEST['montant'])) {
 
         /*
         * Si la page virement est ouvert à l'aide du lien de virement dans la page fiche client
