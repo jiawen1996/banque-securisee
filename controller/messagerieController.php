@@ -1,6 +1,6 @@
 <?php
 require_once('../model/myModel.php');
-require_once('../outils_controller.php');
+require_once('outils_controller.php');
 session_start();
 
 function isDestEmploye($idDest) {
