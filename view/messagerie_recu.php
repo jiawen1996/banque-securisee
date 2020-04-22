@@ -35,7 +35,7 @@ interdireSansLogin();
         echo '<label">Sujet : </label><span>'.  $message['sujet_msg'] . '</span>';
         echo '</div>';
         echo '<div class="field">';
-        echo '<label>Message : </label><span>'. $message['corps_msg'].'</span>';
+        echo '<label>Message : </label><div><span>'. $message['corps_msg'].'</div></span>';
         echo '</div></div></article>';
       }
     ?>
