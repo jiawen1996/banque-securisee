@@ -1,6 +1,6 @@
 <?php
 require_once('../model/messagesModel.php');
-require_once('outils_controller.php');
+require_once('../outil/outils_securite.php');
 session_start();
 
 function isDestEmploye($idDest) {

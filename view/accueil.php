@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../controller/outils_controller.php');
+require_once('../outil/outils_securite.php');
 interdireSansLogin();
 deleteChosenUser();
 
@@ -77,7 +77,7 @@ deleteChosenUser();
               <!-- Fiche Client s'affiche uniquement pour les employés -->
               <?php
               if ($_SESSION["connected_user"]["profil_user"] == "employe") {
-                echo("<div class=\"field\"><button onclick=\"location.href='ficheClient.php'\">Fiche client</button></div>"); 
+                echo '<div class="field"><button onclick="location.href="ficheClient.php">Fiche client</button></div>'; 
               }
               ?>
           </div>
@@ -86,3 +86,4 @@ deleteChosenUser();
 
 </body>
 </html>
+

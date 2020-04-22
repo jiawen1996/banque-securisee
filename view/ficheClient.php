@@ -1,5 +1,5 @@
 <?php
-require_once('../controller/outils_controller.php');
+require_once('../outil/outils_securite.php');
 session_start();
 interdireSansLogin();
 reserverEmploye();

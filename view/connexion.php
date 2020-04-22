@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../controller/outils_controller.php');
+require_once('../outil/outils_securite.php');
 deleteChosenUser();
 
 ?>
@@ -34,7 +34,7 @@ deleteChosenUser();
       if (isset($_REQUEST["nullvalue"])) {
         echo '<p class="errmsg">Merci de saisir votre login et votre mot de passe</p>';
       } else if (isset($_REQUEST["badvalue"])) {
-        echo '<p class="errmsg">Votre login/mot de passe est incorrect. Nombre de tentatives : '. $_SESSION["tentatives"] .'</p>';
+        echo '<p class="errmsg">Votre login/mot de passe est incorrect. Nombre de tentatives : '. $_SESSION["tentatives"] .'/5</p>';
       } else if (isset($_REQUEST["disconnect"])) {
         echo '<p>Vous avez bien été déconnecté.</p>';
       } else if (isset($_REQUEST["limitexceeded"])) {
