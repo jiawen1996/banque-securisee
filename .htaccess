@@ -14,4 +14,4 @@ RewriteRule ^(.*)$ https://www.utc.fr [R=301,L]
 #
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ connexion.php/$1 [QSA,L]
+RewriteRule ^ public/index.php [QSA,L]
