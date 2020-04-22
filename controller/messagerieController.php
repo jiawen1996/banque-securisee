@@ -19,14 +19,14 @@ if (isset($_REQUEST['action'])) {
         //Sinon -> si la destination est un employé -> ok
         if ($_SESSION["connected_user"]["profil_user"] == 'employe' || isDestEmploye($_REQUEST['to'])) {
             addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],inputFilteur($_REQUEST['sujet']), inputFilteur($_REQUEST['corps']));
-            $url_redirect = "../view/vw_messagerie.php?msg_ok";
+            $url_redirect = "../view/messagerie.php?msg_ok";
         } else {
-            $url_redirect = "../view/vw_messagerie.php?msg_fail";
+            $url_redirect = "../view/messagerie.php?msg_fail";
         }
     } else if ($_REQUEST['action'] == 'msglist') {
         /* ======== MESSAGE ======== */
         $_SESSION['messagesRecus'] = findMessagesInbox($_REQUEST["userid"]);
-        $url_redirect = "../view/vw_messagerie_recu.php";
+        $url_redirect = "../view/messagerie_recu.php";
 
     }
 }

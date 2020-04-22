@@ -24,15 +24,15 @@ if ( isAuthentificated()) {
             $src = &$_SESSION["chosen_user"];
         }
         if(!transfert($_REQUEST['destination'],$src["numero_compte"], $_REQUEST['montant'], $_REQUEST['passwordTransfert'], $_SESSION["connected_user"]["numero_compte"])) {
-            $url_redirect = "../view/vw_virement.php?bad_pwd";
+            $url_redirect = "../view/virement.php?bad_pwd";
         } else {
             $src["solde_compte"] = $src["solde_compte"] -  $_REQUEST['montant'];
-            $url_redirect = "../view/vw_virement.php?trf_ok";
+            $url_redirect = "../view/virement.php?trf_ok";
         }
         unset($src);
 
     } else {
-        $url_redirect = "../view/vw_virement.php?bad_mt=".$_REQUEST['montant'];
+        $url_redirect = "../view/virement.php?bad_mt=".$_REQUEST['montant'];
     }
 }
 

@@ -8,7 +8,7 @@ interdireSansLogin();
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Reserve</title>
+    <title>Erreur</title>
     <link rel="stylesheet" type="text/css" media="all"  href="../css/mystyle.css" />
 </head>
 <body>

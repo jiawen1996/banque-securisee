@@ -43,8 +43,8 @@ deleteChosenUser();
               <div class="field">
                   <label>Profil : </label><span><?php echo $_SESSION["connected_user"]["profil_user"];?></span>
               </div>
-              <p><a href="vw_messagerie.php" target="_blank">Messagerie</a></p>
-              <p><a href="vw_virement.php" target="_blank">Virement</a></p>
+              <p><a href="messagerie.php" target="_blank">Messagerie</a></p>
+              <p><a href="virement.php" target="_blank">Virement</a></p>
           </div>
         </article>
         
@@ -68,10 +68,10 @@ deleteChosenUser();
                   <span>Vos activités</span>
               </div>
               <div class="field">
-                <button onclick="location.href='vw_virement.php'">Effectuer un virement</button>
+                <button onclick="location.href='virement.php'">Effectuer un virement</button>
               </div>
               <div class="field">
-                <button onclick="location.href='vw_messagerie.php'">Messagerie</button>
+                <button onclick="location.href='messagerie.php'">Messagerie</button>
               </div>
 
               <!-- Fiche Client s'affiche uniquement pour les employés -->
