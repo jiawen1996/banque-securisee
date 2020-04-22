@@ -19,13 +19,24 @@ if (!isset($_REQUEST['login']) || !isset($_REQUEST['mdp']) || $_REQUEST['login']
     $url_redirect = "../view/connexion.php?nullvalue";
     
 } else {
+    // compteur de nbre de tentative
+    if (!isset($_SESSION["tentatives"])) { 
+      $_SESSION["tentatives"] = 1; 
+    } else { 
+      $_SESSION["tentatives"] = $_SESSION["tentatives"] +1; 
+    } 
         
     $utilisateur = findUserByLoginPwd($_REQUEST['login'], $_REQUEST['mdp']);
     
-    if ($utilisateur == false) {
     // echec authentification
-    $url_redirect = "../view/connexion.php?badvalue";
-    
+    if ($utilisateur == false) {
+        
+        // Limiter le nombre de tentatives
+        if (isset($_SESSION["tentatives"]) && $_SESSION["tentatives"] < 3) {
+          $url_redirect = "../view/connexion.php?badvalue";
+        } else if (isset($_SESSION["tentatives"]) && $_SESSION["tentatives"] >= 5) {
+          $url_redirect = "../view/connexion.php?limitexceeded";
+        }
     } else {
     // authentification réussie
     $_SESSION["connected_user"] = $utilisateur;
@@ -36,10 +47,9 @@ if (!isset($_REQUEST['login']) || !isset($_REQUEST['mdp']) || $_REQUEST['login']
       $_SESSION["listeClients"] = findAllClients();
     }
     $url_redirect = "../view/accueil.php";
-    }
-    
+    } 
 }
-        
+
 header("Location: $url_redirect");
 
 ?>
