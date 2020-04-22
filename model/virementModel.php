@@ -34,7 +34,7 @@ function transfert($dest, $src, $mt, $pwdTransfert, $realisateur) {
                 echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
                 $trf_ok = false;
             } else {
-                $stmt->bind_param("is", $mt, $dest);
+                $stmt->bind_param("ds", $mt, $dest);
                 $stmt->execute();
                 $stmt->close();
             }
@@ -47,7 +47,7 @@ function transfert($dest, $src, $mt, $pwdTransfert, $realisateur) {
                 echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
                 $trf_ok = false;
             } else {
-                $stmt->bind_param("is", $mt, $src);
+                $stmt->bind_param("ds", $mt, $src);
                 $stmt->execute();
                 $stmt->close();
             }

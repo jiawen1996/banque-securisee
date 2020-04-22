@@ -72,7 +72,7 @@
                     </select>
                 </div>
                 <div class="field">
-                    <label>Montant à transférer : </label><input type="text" size="10" name="montant">
+                    <label>Montant à transférer : </label><input type="number" step='0.01' placeholder='0.00' name="montant">
                 </div>
                 <div class="field">
                     <label>Mot de passe : </label><input type="password" name="passwordTransfert" placeholder="mot de passe de virement" />
