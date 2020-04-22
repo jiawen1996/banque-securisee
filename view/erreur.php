@@ -1,5 +1,5 @@
 <?php
-require_once('../controller/outils_controller.php');
+require_once('../outil/outils_securite.php');
 session_start();
 interdireSansLogin();
 ?>
@@ -43,12 +43,3 @@ interdireSansLogin();
 
 </body>
 </html>
-
-<?php
-    if (isset($_REQUEST["verrouillage"])) {
-        echo 'sleep';
-        //sleep(10);
-        //header("Location: connexion.php");
-    }
-
-?>
