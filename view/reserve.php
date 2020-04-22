@@ -1,3 +1,9 @@
+<?php
+require_once('../controller/outils_controller.php');
+session_start();
+interdireSansLogin();
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -22,7 +28,7 @@
                 <span>Erreur</span>
             </div>
             <div class="field">
-                Vous n'avez pas droit à accéder à la page !
+                Vous n\'avez pas droit à accéder à la page !
             </div>
         </div>
     </article>
@@ -37,3 +43,12 @@
 
 </body>
 </html>
+
+<?php
+    if (isset($_REQUEST["verrouillage"])) {
+        echo 'sleep';
+        //sleep(10);
+        //header("Location: connexion.php");
+    }
+
+?>
