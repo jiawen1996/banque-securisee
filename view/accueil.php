@@ -43,8 +43,6 @@ deleteChosenUser();
               <div class="field">
                   <label>Profil : </label><span><?php echo $_SESSION["connected_user"]["profil_user"];?></span>
               </div>
-              <p><a href="messagerie.php" target="_blank">Messagerie</a></p>
-              <p><a href="virement.php" target="_blank">Virement</a></p>
           </div>
         </article>
         
