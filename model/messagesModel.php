@@ -54,13 +54,21 @@ function findMessagesInbox($userid) {
 
         if  (!$stmt) {
             echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
+            return false;
         } else {
-            $stmt->bind_param("iiss", $to, $from, $subject_encode, $body_encode);
-            $stmt->execute();
-            $stmt->close();
+            
+            try {
+                $stmt->bind_param("iiss", $to, $from, $subject_encode, $body_encode);
+                $stmt->execute();
+                $stmt->close();
+            } catch (Exception $e) {
+                return false;
+            }
+            
         }
         
         $mysqli->close();
+        return true;
     }
   
   }

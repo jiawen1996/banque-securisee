@@ -15,10 +15,8 @@ if (isset($_REQUEST['action'])) {
     if ($_REQUEST['action'] == 'sendmsg') {
 
         /* ======== MESSAGE ======== */
-        //Si l'utilisateur est un employé  -> ok
-        //Sinon -> si la destination est un employé -> ok
-        if ($_SESSION["connected_user"]["profil_user"] == 'employe' || isDestEmploye($_REQUEST['to'])) {
-            addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],inputFilteur($_REQUEST['sujet']), inputFilteur($_REQUEST['corps']));
+        
+        if (addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],inputFilteur($_REQUEST['sujet']), inputFilteur($_REQUEST['corps']))){
             $url_redirect = "../view/messagerie.php?msg_ok";
         } else {
             $url_redirect = "../view/messagerie.php?msg_fail";
