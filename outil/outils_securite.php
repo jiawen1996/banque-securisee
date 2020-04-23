@@ -28,7 +28,7 @@ function reserverEmploye() {
     } else {
         if ( $_SESSION["connected_user"]["profil_user"] != "employe" ) {
             // URL de redirection par défaut (si pas d'action ou action non reconnue)
-            $url_redirect = "../view/reserve.php";
+            $url_redirect = "../view/erreur.php";
             header("Location: $url_redirect");
         }
     }
