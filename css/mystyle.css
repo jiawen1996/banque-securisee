@@ -119,6 +119,7 @@ body {
 .field div {
   overflow-x: scroll;
   width: 400px;
+  height: 40px;
 }
 
 .field input {
