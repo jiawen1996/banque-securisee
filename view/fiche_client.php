@@ -3,6 +3,8 @@ require_once('../outil/outils_securite.php');
 
 session_start();
 timeout_session();
+// la session devrait vivre au maximum 15 minutes
+$_SESSION['discard_after'] = time() + 900;
 interdire_sans_login();
 reserver_employe();
 
@@ -47,7 +49,7 @@ reserver_employe();
     <?php
         if (isset($_SESSION["chosen_user"]) && isset($_REQUEST["userfound"])) {
             echo '<article><div class="fieldset"><div class="fieldset_label">';
-            echo '<span>Informations clientèlles</span><span><a href="ficheClient.php"><button>X</button></a></span></div>';
+            echo '<span>Informations clientèlles</span><span><a href="fiche_client.php"><button>X</button></a></span></div>';
             echo '<div class="field"><label>Nom : </label><span>' . $_SESSION['chosen_user']["nom"] . '</span></div>';
             echo '<div class="field"><label>Prénom : </label><span>' . $_SESSION['chosen_user']["prenom"] . '</span></div>';
             echo '<div class="field"><label>N° compte : </label><span>' . $_SESSION['chosen_user']["numero_compte"] . '</span></div>';

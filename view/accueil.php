@@ -79,7 +79,9 @@ delete_chosen_user();
               <!-- Fiche Client s'affiche uniquement pour les employés -->
               <?php
               if ($_SESSION["connected_user"]["profil_user"] == "employe") {
-                echo '<div class="field"><button onclick="location.href="ficheClient.php">Fiche client</button></div>'; 
+                echo '<div class="field">';
+                echo '<button onclick="location.href="fiche_client.php">Fiche client</button;';
+                echo '</div>'; 
               }
               ?>
           </div>

@@ -30,7 +30,7 @@ interdire_sans_login();
                 <span>Erreur</span>
             </div>
             <div class="field">
-                Vous n\'avez pas droit à accéder à la page !
+                Vous n'avez pas droit à accéder à la page !
             </div>
         </div>
     </article>
