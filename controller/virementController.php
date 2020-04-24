@@ -2,6 +2,7 @@
 require_once('../model/virementModel.php');
 require_once('../outil/outils_securite.php');
 session_start();
+timeout_session();
 
 function isConnectedUser () {
 

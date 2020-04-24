@@ -11,7 +11,7 @@ function isAuthentificated() {
 }
 
 // REDIRIGER VERS LA PAGE DE CONNEXION SI L'UTILISATEUR NE S'EST PAS CONNECTÉ
-function interdireSansLogin() {
+function interdire_sans_login() {
     if (!isAuthentificated()) {
         header('Location: /banque-securisee/view/connexion.php');
     }
@@ -38,12 +38,27 @@ function reserverEmploye() {
 * LORSQUE L'EMPLOYÉ RETOURNE DEPUIS LA PAGE VIREMENT D'UN CLIENT
 * IL FAUT RAFRAICHIR SON SESSION EN SUPPRIMANT $_SESSION["chosen_user"]
 */
-function deleteChosenUser() {
+function delete_chosen_user() {
     if (isset($_SESSION["chosen_user"])) {
         print_r($_SESSION["chosen_user"]);
         unset($_SESSION["chosen_user"]);
         echo 'supprimer chosen_user';
         print_r($_SESSION["chosen_user"]);
+    }
+}
+
+/**
+ * ACTUALISER LA SESSION LORSQUE LE TEMP D'INACTIVITÉ SE DÉPASSE (15 minutes)
+ * REDIGIRER VERS LA PAGE index.php
+ */
+function timeout_session() {
+    $now = time();
+    
+    if (isset($_SESSION['discard_after']) && $now > $_SESSION['discard_after']) {
+        // this session has worn out its welcome; kill it and start a brand new one
+        session_unset();
+        session_destroy();
+        header("Location: ../index.php");
     }
 }
 

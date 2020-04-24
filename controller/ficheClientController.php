@@ -2,6 +2,7 @@
   require_once('../outil/outils_securite.php');
   require_once('../model/usersModel.php');
   session_start();
+  timeout_session();
   
   // URL de redirection par défaut (si pas d'action ou action non reconnue)
   $url_redirect = "../index.php";

@@ -1,7 +1,9 @@
 <?php
 require_once('../model/messagesModel.php');
 require_once('../outil/outils_securite.php');
+
 session_start();
+timeout_session();
 
 function isDestEmploye($idDest) {
     $profilDest = $_SESSION["listeUsers"][$idDest]['profil_user'];

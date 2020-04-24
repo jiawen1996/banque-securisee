@@ -1,8 +1,12 @@
 <?php
-session_start();
 require_once('../outil/outils_securite.php');
-interdireSansLogin();
-deleteChosenUser();
+
+session_start();
+timeout_session();
+// la session devrait vivre au maximum 15 minutes
+$_SESSION['discard_after'] = time() + 900;
+interdire_sans_login();
+delete_chosen_user();
 
 ?>
 

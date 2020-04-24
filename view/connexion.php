@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('../outil/outils_securite.php');
-deleteChosenUser();
+delete_chosen_user();
 
 ?>
 

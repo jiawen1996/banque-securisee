@@ -1,7 +1,9 @@
 <?php
 require_once('../outil/outils_securite.php');
+
 session_start();
-interdireSansLogin();
+timeout_session();
+interdire_sans_login();
 reserverEmploye();
 
 ?>

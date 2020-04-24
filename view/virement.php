@@ -1,7 +1,9 @@
 <?php
-    session_start();
     require_once('../outil/outils_securite.php');
-    interdireSansLogin();
+
+    session_start();
+    timeout_session();
+    interdire_sans_login();
 
     /*
     * Si la page virement est ouvert à l'aide du lien de virement dans la page fiche client
