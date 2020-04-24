@@ -13,12 +13,13 @@
     }
 
     /* ======== DISCONNECT ======== */
-    try {
-        unset($_SESSION["connected_user"]);
-    } catch (Exception $e) {
-        echo 'Disconnexion erreur: ',  $e->getMessage(), "\n";
+    if ( is_authentificated()) {
+      try {
+          unset($_SESSION["connected_user"]);
+      } catch (Exception $e) {
+          echo 'Disconnexion erreur: ',  $e->getMessage(), "\n";
+      }
     }
-  
   header("Location: $url_redirect");
 
 ?>

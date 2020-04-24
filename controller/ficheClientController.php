@@ -15,15 +15,17 @@
   
   
 /* ======== GET CLIENT'S INFORMATIONS ======== */
+if ( is_authentificated()) {
     $utilisateur = findUserById($_REQUEST['id_client']);
-    
     if ($utilisateur == false) {
         $url_redirect = "../view/ficheClient.php?badvalue";
     } else {
         $_SESSION["chosen_user"] = $utilisateur;
         $url_redirect = "../view/ficheClient.php?userfound";
     }
+} else {
+  $url_redirect = "../index.php";
+}    
+header("Location: $url_redirect");
 
-    header("Location: $url_redirect");
-        
 ?>
