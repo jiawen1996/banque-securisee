@@ -11,7 +11,7 @@ function isConnectedUser () {
 $url_redirect = "../index.php";
 
 /* ======== TRANSFERT ======== */
-if ( isAuthentificated()) {
+if ( is_authentificated()) {
     if (is_numeric($_REQUEST['montant'])) {
 
         /*

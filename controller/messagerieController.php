@@ -18,7 +18,7 @@ if (isset($_REQUEST['action'])) {
 
         /* ======== MESSAGE ======== */
         
-        if (addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],inputFilteur($_REQUEST['sujet']), inputFilteur($_REQUEST['corps']))){
+        if (addMessage($_REQUEST['to'],$_SESSION["connected_user"]["id_user"],input_filteur($_REQUEST['sujet']), input_filteur($_REQUEST['corps']))){
             $url_redirect = "../view/messagerie.php?msg_ok";
         } else {
             $url_redirect = "../view/messagerie.php?msg_fail";
