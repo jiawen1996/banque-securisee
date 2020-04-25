@@ -23,7 +23,13 @@ delete_chosen_user();
             <form method="POST" action="../controller/connexionController.php">
                 <input type="text" name="login" placeholder="login"/>
                 <input type="password" name="mdp" placeholder="mot de passe"/>
-                <button <?php if (isset($_SESSION['tentatives']) && $_SESSION['tentatives'] >=5) { echo 'disabled style="cursor: not-allowed;background-color: #999;"';}?>>
+                <button <?php
+//                    urlencode($_REQUEST['login']);
+//                    urlencode($_REQUEST['mdp']);
+                    if (isset($_SESSION['tentatives']) && $_SESSION['tentatives'] >=5) {
+                        echo 'disabled style="cursor: not-allowed;background-color: #999;"';
+                    }
+                ?>>
                   login
                 </button>
             </form>
