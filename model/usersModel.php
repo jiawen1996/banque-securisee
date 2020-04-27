@@ -47,6 +47,9 @@ function findUserByLoginPwd($login, $pwd) {
     return $utilisateur;
 }
 
+/**
+ * Si le client échoue à l'authentification, il va inserer une ligne dans la table de connection_errors
+ */
 function addTentative ($ip) {
     $mysqli = getMySqliConnection();
     $req = "insert into connection_errors(ip,error_date) values(?,CURTIME())";
@@ -56,6 +59,10 @@ function addTentative ($ip) {
     $stmt->close();
 }
 
+
+/**
+ * Compter le nombre de tentatives en fonction de l'adresse ip
+ */
 function ipIsBanned($ip) {
     $mysqli = getMySqliConnection();
 
