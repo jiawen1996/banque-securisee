@@ -21,32 +21,61 @@ function findUserByLoginPwd($login, $pwd) {
             $req = "SELECT nom,prenom,login,id_user,numero_compte,profil_user,solde_compte FROM users WHERE login= ?";
             $stmt = $mysqli->prepare($req);
 
-            if  (!$stmt) {
-              echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
-              $utilisateur = false;
-            } else {
-              $stmt->bind_param("s", $login);
-              $stmt->execute();
-              $result = $stmt->get_result();
-              
-              if($result->num_rows === 0) {
-                $utilisateur = false;
+              if  (!$stmt) {
+                  echo 'Erreur de préparation de requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
+                  $utilisateur = false;
               } else {
-                $utilisateur = $result->fetch_assoc();
-                $result->free();
+                  $stmt->bind_param("s", $login);
+                  $stmt->execute();
+                  $result = $stmt->get_result();
+
+                  if($result->num_rows === 0) {
+                      $utilisateur = false;
+                  } else {
+                      $utilisateur = $result->fetch_assoc();
+                      $result->free();
+                  }
+
+                  $stmt->close();
               }
 
-              $stmt->close();
-            }
-            
-          } 
-        } 
-      $mysqli->close();
+          }
+        }
+        $mysqli->close();
     }
-  
+
     return $utilisateur;
-  }
-  
+}
+
+function addTentative ($ip) {
+    $mysqli = getMySqliConnection();
+    $req = "insert into connection_errors(ip,error_date) values(?,CURTIME())";
+    $stmt = $mysqli->prepare($req);
+    $stmt->bind_param("s", $ip);
+    $stmt->execute();
+    $stmt->close();
+}
+
+function ipIsBanned($ip) {
+    $mysqli = getMySqliConnection();
+
+    if ($mysqli->connect_error) {
+        trigger_error('Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error, E_USER_ERROR);
+        return false;
+    } else {
+        $stmt = $mysqli->prepare("select count(*) as nb_tentatives from connection_errors where ip=?");
+        $stmt->bind_param("s",  $ip);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        if($count > 4) {
+            return true; // cette IP a atteint le nombre maxi de 5 tentatives infructueuses
+        } else {
+            return false;
+        }
+        $mysqli->close();
+    }
+}
 
 /**
  * Récupérer les informations d'utilisateur en sachant son id_user
