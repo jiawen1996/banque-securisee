@@ -17,6 +17,12 @@ function interdire_sans_login() {
     }
 }
 
+//
+function setToken() {
+  $mytoken = bin2hex(random_bytes(128)); // token qui va servir à prévenir des attaques CSRF
+  $_SESSION["mytoken"] = $mytoken;
+  return $mytoken;
+}
 
 /*
 * REDIRIGER VERS LA PAGE DE MESSAGE D'ERREUR 

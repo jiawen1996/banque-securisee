@@ -19,6 +19,7 @@
             return $_SESSION["connected_user"];
         }
     }
+    $mytoken = setToken();
 ?>
 
 <!doctype html>
@@ -81,9 +82,12 @@
                 <div class="field">
                     <label>Mot de passe : </label><input type="password" name="passwordTransfert" placeholder="mot de passe de virement" />
                 </div>
+                <input type="hidden" name="mytoken" value="<?php echo $mytoken; ?>">
                 <button class="form-btn">Transférer</button>
                 <?php
-                if (isset($_REQUEST["trf_ok"])) {
+                if (isset($_REQUEST["err_token"])) {
+                  echo '<p>Echec virement : le contrôle d\'intégrité a échoué.</p>';
+                }else if (isset($_REQUEST["trf_ok"])) {
                     echo '<p>Virement effectué avec succès.</p>';
                 } else if (isset($_REQUEST["bad_mt"])) {
                     echo '<p>Le montant saisi est incorrect : '.$_REQUEST["bad_mt"].'</p>';

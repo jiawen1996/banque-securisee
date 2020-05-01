@@ -3,6 +3,8 @@
   ini_set( 'session.cookie_httponly', 1 );
 // interdire le cookie de session via l'URL (uniquement par cookie)
   ini_set('session.use_only_cookies', 1);
+  // interdire l'utilisation d'un ID de session initialisée par un attaquant
+  ini_set('session.use_strict_mode', 1);
   session_start();
   
   if(!isset($_SESSION["connected_user"]) || $_SESSION["connected_user"] == "") {
