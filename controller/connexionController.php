@@ -3,6 +3,7 @@
   require_once('../model/usersModel.php');
   require_once('../model/connection_errorsModel.php');
   session_start();
+
   
   // URL de redirection par défaut (si pas d'action ou action non reconnue)
   $url_redirect = "../index.php";
@@ -15,22 +16,24 @@
 
 
 /* ======== AUTHENT ======== */
-if (ipIsBanned($_SERVER['REMOTE_ADDR'])){
+//éviter l'attaque CSRF
+if (isset($_REQUEST['mytoken']) || $_REQUEST['mytoken'] != $_SESSION['mytoken']) {
+  if (ipIsBanned($_SERVER['REMOTE_ADDR'])) {
     // cette IP est bloquée
     $url_redirect = "../view/connexion.php?limitexceeded";
-} else if (!isset($_REQUEST['login']) || !isset($_REQUEST['mdp']) || $_REQUEST['login'] == "" || $_REQUEST['mdp'] == "") {
+  } else if (!isset($_REQUEST['login']) || !isset($_REQUEST['mdp']) || $_REQUEST['login'] == "" || $_REQUEST['mdp'] == "") {
     // manque login ou mot de passe
     $url_redirect = "../view/connexion.php?nullvalue";
-} else {
-  //vérifier l'autentification
-  $utilisateur = findUserByLoginPwd($_REQUEST['login'], $_REQUEST['mdp']);
+  } else {
+    //vérifier l'autentification
+    $utilisateur = findUserByLoginPwd($_REQUEST['login'], $_REQUEST['mdp']);
 
-  // L'authentification échoue
-  if ($utilisateur == false) {
+    // L'authentification échoue
+    if ($utilisateur == false) {
       // Augmenter de nbre de tentative
       if (!isset($_SESSION["tentatives"])) {
         $_SESSION["tentatives"] = 0;
-      } 
+      }
 
       //Augmenter le nombre de tentatives dans la session
       $_SESSION["tentatives"] = $_SESSION["tentatives"] + 1;
@@ -44,7 +47,7 @@ if (ipIsBanned($_SERVER['REMOTE_ADDR'])){
       } else {
         $url_redirect = "../view/connexion.php?badvalue";
       }
-  } else {
+    } else {
       // authentification réussie
       $_SESSION["connected_user"] = $utilisateur;
       $_SESSION["listeUsers"] = findAllUsers();
@@ -54,10 +57,11 @@ if (ipIsBanned($_SERVER['REMOTE_ADDR'])){
        * listeConnectionError contient les informations de connection échouée à s'afficher dans deverrouillage.php
        */
       if ($utilisateur["profil_user"] == "employe") {
-          $_SESSION["listeClients"] = findAllClients();
-          $_SESSION["listeConnectionError"] = findAllErrorConnection();
+        $_SESSION["listeClients"] = findAllClients();
+        $_SESSION["listeConnectionError"] = findAllErrorConnection();
       }
       $url_redirect = "../view/accueil.php";
+    }
   }
 }
 

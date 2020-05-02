@@ -7,11 +7,6 @@
 
 
 RewriteEngine On
-RewriteCond %{HTTP_REFERER} .*google.com
-#RewriteCond % ^http://(.*)https://(.*) [NC]
-RewriteRule ^(.*)$ https://www.utc.fr [R=301,L]
-
-#
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ public/index.php [QSA,L]
