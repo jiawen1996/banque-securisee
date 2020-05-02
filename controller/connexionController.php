@@ -18,8 +18,8 @@
 /* ======== AUTHENT ======== */
 //éviter l'attaque CSRF
 if (isset($_REQUEST['mytoken']) || $_REQUEST['mytoken'] != $_SESSION['mytoken']) {
-  if (ipIsBanned($_SERVER['REMOTE_ADDR'])) {
-    // cette IP est bloquée
+    // cette IP est bloquée, blocque le bouton login
+    $_SESSION['tentatives'] = 5;
     $url_redirect = "../view/connexion.php?limitexceeded";
   } else if (!isset($_REQUEST['login']) || !isset($_REQUEST['mdp']) || $_REQUEST['login'] == "" || $_REQUEST['mdp'] == "") {
     // manque login ou mot de passe
@@ -42,7 +42,7 @@ if (isset($_REQUEST['mytoken']) || $_REQUEST['mytoken'] != $_SESSION['mytoken'])
       addTentative($_SERVER["REMOTE_ADDR"], $_REQUEST['login'], $deviceName);
 
       // Limiter le nombre de tentatives
-      if (isset($_SESSION["tentatives"]) && $_SESSION["tentatives"] > 5) {
+      if (isset($_SESSION["tentatives"]) && $_SESSION["tentatives"] >= 5) {
         $url_redirect = "../view/connexion.php?limitexceeded";
       } else {
         $url_redirect = "../view/connexion.php?badvalue";

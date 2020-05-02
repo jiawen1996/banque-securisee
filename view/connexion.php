@@ -25,7 +25,8 @@ $tokenConnexion = setToken();
                 <input type="password" name="mdp" placeholder="mot de passe"/>
                 <input type="hidden" name="mytoken" value="<?php echo $tokenConnexion; ?>">
                 <button <?php
-                    if (isset($_SESSION['tentatives']) && $_SESSION['tentatives'] >=5) {
+                    if ((isset($_SESSION['tentatives']) && $_SESSION['tentatives'] >=5) 
+                        || isset($_REQUEST["limitexceeded"])) {
                         echo 'disabled style="cursor: not-allowed;background-color: #999;"';
                     }
                 ?>>
