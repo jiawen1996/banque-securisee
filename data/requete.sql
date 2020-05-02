@@ -1,6 +1,8 @@
 CREATE DATABASE devoir_sr03;
 
+CREATE USER 'sr03'@'localhost' IDENTIFIED BY 'sr03';
 GRANT ALL ON devoir_sr03.* TO 'sr03'@'localhost';
+FLUSH PRIVILEGES;
 
 CREATE TABLE users (
     id_user int AUTO_INCREMENT PRIMARY KEY,
