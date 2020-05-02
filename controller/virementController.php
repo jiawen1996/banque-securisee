@@ -32,6 +32,12 @@ if ( is_authentificated()) {
         $url_redirect = "../view/virement.php?bad_pwd";
       } else {
         $src["solde_compte"] = $src["solde_compte"] - $_REQUEST['montant'];
+
+        //Mise à jour le solde de destinataire si il a effectué le virement du compte de client vers son compte
+        if ($_REQUEST['destination'] == $_SESSION["connected_user"]["numero_compte"]){
+          $_SESSION["connected_user"]["solde_compte"] = $_SESSION["connected_user"]["solde_compte"] + $_REQUEST['montant']; 
+        }
+        
         $url_redirect = "../view/virement.php?trf_ok";
       }
       unset($src);
