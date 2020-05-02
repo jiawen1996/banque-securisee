@@ -93,28 +93,28 @@ composer install
 2. Modifier la configuration de l'Apache pour le mode SSL
 
    ```bash
-sr03@sr03:~$ sudo vim /etc/apache2/sites-available/000-default.conf
-   <IfModule mod_ssl.c>
-           <VirtualHost *:443>
-                   ServerName sr03.utc
-   								...
-                   SSLEngine on
-                   SSLCertificateFile /etc/ssl/certs/sr03.utc.crt
-                   SSLCertificateKeyFile /etc/ssl/private/server.key
-                   SSLCertificateChainFile /etc/ssl/certs/servercertchain.cert.pem
-                   SSLCACertificateFile /etc/ssl/certs/clientcertchain.cert.pem
-                   SSLVerifyClient require
-                   SSLVerifyDepth 3
-           </VirtualHost>
-   </IfModule>
-   
-   ##créer un fichier pour redirection
-   sr03@sr03:~$ sudo vim /etc/apache2/sites-available/000-default_redirect.conf 
-   <VirtualHost *:80>
-           ServerName sr03.utc
-           ServerAdmin webmaster@localhost
-           Redirect / https://sr03.utc/
-   </VirtualHost>
+    sr03@sr03:~$ sudo vim /etc/apache2/sites-available/000-default.conf
+       <IfModule mod_ssl.c>
+               <VirtualHost *:443>
+                       ServerName sr03.utc
+       								...
+                       SSLEngine on
+                       SSLCertificateFile /etc/ssl/certs/sr03.utc.crt
+                       SSLCertificateKeyFile /etc/ssl/private/server.key
+                       SSLCertificateChainFile /etc/ssl/certs/servercertchain.cert.pem
+                       SSLCACertificateFile /etc/ssl/certs/clientcertchain.cert.pem
+                       SSLVerifyClient require
+                       SSLVerifyDepth 3
+               </VirtualHost>
+       </IfModule>
+       
+       ##créer un fichier pour redirection
+       sr03@sr03:~$ sudo vim /etc/apache2/sites-available/000-default_redirect.conf 
+       <VirtualHost *:80>
+               ServerName sr03.utc
+               ServerAdmin webmaster@localhost
+               Redirect / https://sr03.utc/
+       </VirtualHost>
    
    ## activer le mode ssl
    sudo a2enmod ssl
