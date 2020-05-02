@@ -12,33 +12,42 @@
     echo 'console.log('. json_encode( $data ) .')';
     echo '</script>';
   }
-  
-  
+
+
 /* ======== DÉVEROUILLER L'IP BLOQUÉ ======== */
 if ( is_authentificated()) {
-
-    if (isset($_REQUEST['id_connection'])) {
+  //vérifier le rôle d'utilisateur
+  if($_SESSION["connected_user"]["profil_user"] == "employe") {
+    //éviter l'attaque CSRF
+    if (isset($_REQUEST['mytoken']) || $_REQUEST['mytoken'] != $_SESSION['mytoken']) {
+      if (isset($_REQUEST['id_connection'])) {
         $ip = getIP($_REQUEST['id_connection']);
         if ($ip == null) {
-            $url_redirect = "../view/deverrouillage.php?unfoundConnection";
+          $url_redirect = "../view/deverrouillage.php?unfoundConnection";
         } else {
-            $unlock = unlockIP($ip);
-            // Mise à jour la liste connections
-            unset($_SESSION["listeConnectionError"]);
-            $_SESSION["listeConnectionError"] = findAllErrorConnection();
+          $unlock = unlockIP($ip);
+          // Mise à jour la liste connections
+          unset($_SESSION["listeConnectionError"]);
+          $_SESSION["listeConnectionError"] = findAllErrorConnection();
 
-            if ($unlock == false) {
-                $url_redirect = "../view/deverrouillage.php?unlock_fail";
-            } 
-            if ($unlock == true) {
-                $url_redirect = "../view/deverrouillage.php?unlock_ok";
-            }
+          if ($unlock == false) {
+            $url_redirect = "../view/deverrouillage.php?unlock_fail";
+          }
+          if ($unlock == true) {
+            $url_redirect = "../view/deverrouillage.php?unlock_ok";
+          }
         }
-        
-    } else {
+      } else {
         $url_redirect = "../view/erreur.php?unfoundConnection";
+      }
+    } else {
+      $url_redirect = "../view/erreur.php?unfoundConnection";
     }
-    
+  } else {
+    $url_redirect = "../view/erreur.php?unfoundConnection";
+
+  }
+
 } else {
   $url_redirect = "../index.php";
 }    

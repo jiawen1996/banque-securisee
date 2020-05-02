@@ -17,7 +17,7 @@ function interdire_sans_login() {
     }
 }
 
-//
+//générier un token et le mettre dans la session
 function setToken() {
   $mytoken = bin2hex(random_bytes(128)); // token qui va servir à prévenir des attaques CSRF
   $_SESSION["mytoken"] = $mytoken;

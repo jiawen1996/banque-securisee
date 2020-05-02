@@ -7,7 +7,7 @@ timeout_session();
 $_SESSION['discard_after'] = time() + 900;
 interdire_sans_login();
 reserver_employe();
-
+$tokenDeverrouillage = setToken();
 ?>
 
 <!doctype html>
