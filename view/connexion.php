@@ -24,7 +24,8 @@ delete_chosen_user();
                 <input type="text" name="login" placeholder="login"/>
                 <input type="password" name="mdp" placeholder="mot de passe"/>
                 <button <?php
-                    if (isset($_SESSION['tentatives']) && $_SESSION['tentatives'] >=5) {
+                    if ((isset($_SESSION['tentatives']) && $_SESSION['tentatives'] >=5) 
+                        || isset($_REQUEST["limitexceeded"])) {
                         echo 'disabled style="cursor: not-allowed;background-color: #999;"';
                     }
                 ?>>
