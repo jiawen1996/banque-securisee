@@ -22,10 +22,10 @@ reserver_employe();
     <form method="POST" action="../controller/disconnexionController.php">
         <input type="hidden" name="action" value="disconnect">
         <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
-        <button class="btn-logout form-btn">Déconnexion</button>
+        <button class="btn-logout form-btn"><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Déconnexion</button>
     </form>
 
-    <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Fiche client</h2>
+    <h2> Fiche client</h2>
 </header>
 
 <section>    

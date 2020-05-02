@@ -18,7 +18,7 @@ interdire_sans_login();
     <form method="POST" action="../controller/disconnexionController.php">
         <input type="hidden" name="action" value="disconnect">
         <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
-        <button class="btn-logout form-btn">Déconnexion</button>
+        <button class="btn-logout form-btn"><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Déconnexion</button>
     </form>
     <h2>ATTENTION !</h2>
 </header>
@@ -30,7 +30,13 @@ interdire_sans_login();
                 <span>Erreur</span>
             </div>
             <div class="field">
-                Vous n'avez pas droit à accéder à la page !
+            <?php 
+                if (isset($_REQUEST["unfoundConnection"])) {
+                    echo 'La connexion ne se trouve pas dans la base.';
+                } else {
+                    echo 'Vous n\'avez pas droit à accéder à la page !';
+                }
+            ?>  
             </div>
         </div>
     </article>

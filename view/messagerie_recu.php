@@ -20,10 +20,10 @@ interdire_sans_login();
         <form method="POST" action="../controller/disconnexionController.php">
             <input type="hidden" name="action" value="disconnect">
             <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
-            <button class="btn-logout form-btn">Déconnexion</button>
+            <button class="btn-logout form-btn"><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Déconnexion</button>
         </form>
         
-        <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Boite réception</h2>
+        <h2> Boite réception</h2>
   </header>
   <section>
     <?php

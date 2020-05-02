@@ -44,9 +44,6 @@ delete_chosen_user();
       } else if (isset($_REQUEST["limitexceeded"])) {
         echo '<p class="errmsg">Le nombre de tentatives a été dépassé ! Vous êtes verrouillé.</p>';
         echo '<p class="errmsg">Veuillez contacter à votre conseiller pour vous déverrouiller.</p>'; 
-        //Redirect to page unlock after 15s
-        //echo '<p class="errmsg">La page sera actualisée après 15 secondes.</p>'; 
-        //header( "refresh:15;url=connexion.php?unlock");
       } else if (isset($_REQUEST["unlock"])) {
         //Unlock button Login
         unset($_SESSION['tentatives']);

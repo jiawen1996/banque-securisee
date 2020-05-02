@@ -22,10 +22,10 @@ delete_chosen_user();
         <form method="POST" action="../controller/disconnexionController.php">
             <input type="hidden" name="action" value="disconnect">
             <input type="hidden" name="loginPage" value="../view/connexion.php?disconnect">
-            <button class="btn-logout form-btn">Déconnexion</button>
+            <button class="btn-logout form-btn"><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Déconnexion</button>
         </form>
         
-        <h2><?php echo $_SESSION["connected_user"]["prenom"];?> <?php echo $_SESSION["connected_user"]["nom"];?> - Mon compte</h2>
+        <h2> Mon compte</h2>
     </header>
     
     <section>
@@ -80,7 +80,10 @@ delete_chosen_user();
               <?php
               if ($_SESSION["connected_user"]["profil_user"] == "employe") {
                 echo '<div class="field">';
-                echo '<button onclick="location.href="fiche_client.php">Fiche client</button;';
+                echo '<button onclick="location.href=\'fiche_client.php\'">Fiche client</button>';
+                echo '</div>'; 
+                echo '<div class="field">';
+                echo '<button onclick="location.href=\'deverrouillage.php\'">Déverrouiller d\' un utilisateur</button>';
                 echo '</div>'; 
               }
               ?>
