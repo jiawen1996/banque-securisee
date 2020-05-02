@@ -39,8 +39,9 @@ CREATE TABLE messages (
     FOREIGN KEY (id_user_to) REFERENCES users (id_user),
     FOREIGN KEY (id_user_from) REFERENCES users (id_user)
 );
-
-INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('annab','annab','client', 'anna', 'beral', '0001', 100);
-INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('davidd','davidd','employe', 'david', 'dupont', '0002', 100);
-INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte) VALUES ('beanj','beanj','employe', 'bean', 'jackson', '0003', 100);
+-- CHIFFRER DES MOTS DE PASSE AVANT INSERER
+INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte, mot_de_passe_virement) VALUES ('annab','annab','client', 'anna', 'beral', '0001', 100,'annav');
+INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte, mot_de_passe_virement) VALUES ('davidd','davidd','employe', 'david', 'dupont', '0002', 100,'davidv');
+INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte, mot_de_passe_virement) VALUES ('beanj','beanj','employe', 'bean', 'jackson', '0003', 100,'beanv');
+INSERT INTO users (login, mot_de_passe, profil_user, nom, prenom, numero_compte, solde_compte, mot_de_passe_virement) VALUES ('billyw','billyw','employe', 'bean', 'jackson', '0003', 100,'billyv');
 
