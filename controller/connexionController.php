@@ -18,6 +18,7 @@
 /* ======== AUTHENT ======== */
 //éviter l'attaque CSRF
 if (isset($_REQUEST['mytoken']) || $_REQUEST['mytoken'] != $_SESSION['mytoken']) {
+  if (ipIsBanned($_SERVER['REMOTE_ADDR'])) {
     // cette IP est bloquée, blocque le bouton login
     $_SESSION['tentatives'] = 5;
     $url_redirect = "../view/connexion.php?limitexceeded";
