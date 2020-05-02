@@ -18,8 +18,6 @@
 if ( is_authentificated()) {
   //vérifier le rôle d'utilisateur
   if($_SESSION["connected_user"]["profil_user"] == "employe") {
-    //éviter l'attaque CSRF
-    if (isset($_REQUEST['mytoken']) || $_REQUEST['mytoken'] != $_SESSION['mytoken']) {
       if (isset($_REQUEST['id_connection'])) {
         $ip = getIP($_REQUEST['id_connection']);
         if ($ip == null) {
@@ -40,9 +38,7 @@ if ( is_authentificated()) {
       } else {
         $url_redirect = "../view/erreur.php?unfoundConnection";
       }
-    } else {
-      $url_redirect = "../view/erreur.php?unfoundConnection";
-    }
+
   } else {
     $url_redirect = "../view/erreur.php?unfoundConnection";
 

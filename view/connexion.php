@@ -2,7 +2,7 @@
 session_start();
 require_once('../outil/outils_securite.php');
 delete_chosen_user();
-
+$tokenConnexion = setToken();
 ?>
 
 <!doctype html>
@@ -23,6 +23,7 @@ delete_chosen_user();
             <form method="POST" action="../controller/connexionController.php">
                 <input type="text" name="login" placeholder="login"/>
                 <input type="password" name="mdp" placeholder="mot de passe"/>
+                <input type="hidden" name="mytoken" value="<?php echo $tokenConnexion; ?>">
                 <button <?php
                     if ((isset($_SESSION['tentatives']) && $_SESSION['tentatives'] >=5) 
                         || isset($_REQUEST["limitexceeded"])) {
