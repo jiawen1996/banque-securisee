@@ -32,7 +32,7 @@ reserver_employe();
     <!-- Liste d'utilisateurs bloqués avec son login - la date de connexion échec - l'appareil -->
   
     <?php
-        foreach ($_SESSION['listeBlockedUsers'] as $id => $connection) {
+        foreach ($_SESSION['listeConnectionError'] as $id => $connection) {
             echo '<acticle><div class="fieldset">';
             echo '<div class="fieldset_label">';
             echo '<span> Connexion </span>';

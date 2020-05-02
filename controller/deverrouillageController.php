@@ -24,9 +24,9 @@ if ( is_authentificated()) {
         } else {
             $unlock = unlockIP($ip);
             // Mise à jour la liste connections
-            unset($_SESSION["listeBlockedUsers"]);
-            $_SESSION["listeBlockedUsers"] = findAllErrorConnection();
-            
+            unset($_SESSION["listeConnectionError"]);
+            $_SESSION["listeConnectionError"] = findAllErrorConnection();
+
             if ($unlock == false) {
                 $url_redirect = "../view/deverrouillage.php?unlock_fail";
             } 

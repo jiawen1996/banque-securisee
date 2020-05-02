@@ -110,7 +110,7 @@ function getIP($id) {
 function findAllErrorConnection() {
     $mysqli = getMySqliConnection();
   
-    $listeBlockedUsers = array();
+    $listeConnectionError = array();
   
     if ($mysqli->connect_error) {
         echo 'Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error;
@@ -120,14 +120,14 @@ function findAllErrorConnection() {
             echo 'Erreur requête BDD ['.$req.'] (' . $mysqli->errno . ') '. $mysqli->error;
         } else {
             while ($uneConnexion = $result->fetch_assoc()) {
-              $listeBlockedUsers[$uneConnexion['id_connection']] = $uneConnexion;
+              $listeConnectionError[$uneConnexion['id_connection']] = $uneConnexion;
             }
             $result->free();
         }
         $mysqli->close();
     }
   
-    return $listeBlockedUsers;
+    return $listeConnectionError;
   }
 
 ?>

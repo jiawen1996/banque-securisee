@@ -36,8 +36,7 @@ if (ipIsBanned($_SERVER['REMOTE_ADDR'])){
       $_SESSION["tentatives"] = $_SESSION["tentatives"] + 1;
       $deviceName = $_SERVER["HTTP_USER_AGENT"];
       //Augmenter le nombre de tentatives dans la base de donnée
-      $rep = addTentative($_SERVER["REMOTE_ADDR"], $_REQUEST['login'], $deviceName);
-      $_SESSION["rep"] = $rep;
+      addTentative($_SERVER["REMOTE_ADDR"], $_REQUEST['login'], $deviceName);
 
       // Limiter le nombre de tentatives
       if (isset($_SESSION["tentatives"]) && $_SESSION["tentatives"] > 5) {
@@ -50,10 +49,13 @@ if (ipIsBanned($_SERVER['REMOTE_ADDR'])){
       $_SESSION["connected_user"] = $utilisateur;
       $_SESSION["listeUsers"] = findAllUsers();
 
-      // liste de clients contenant tous les informations de client à s'afficher dans ficheClient.php pour les employés
+      /**
+       * liste de clients contenant tous les informations de client à s'afficher dans ficheClient.php pour les employés
+       * listeConnectionError contient les informations de connection échouée à s'afficher dans deverrouillage.php
+       */
       if ($utilisateur["profil_user"] == "employe") {
           $_SESSION["listeClients"] = findAllClients();
-          $_SESSION["listeBlockedUsers"] = findAllErrorConnection();
+          $_SESSION["listeConnectionError"] = findAllErrorConnection();
       }
       $url_redirect = "../view/accueil.php";
   }
