@@ -47,42 +47,6 @@ function findUserByLoginPwd($login, $pwd) {
     return $utilisateur;
 }
 
-/**
- * Si le client échoue à l'authentification, il va inserer une ligne dans la table de connection_errors
- */
-function addTentative ($ip) {
-    $mysqli = getMySqliConnection();
-    $req = "insert into connection_errors(ip,error_date) values(?,CURTIME())";
-    $stmt = $mysqli->prepare($req);
-    $stmt->bind_param("s", $ip);
-    $stmt->execute();
-    $stmt->close();
-}
-
-
-/**
- * Compter le nombre de tentatives en fonction de l'adresse ip
- */
-function ipIsBanned($ip) {
-    $mysqli = getMySqliConnection();
-
-    if ($mysqli->connect_error) {
-        trigger_error('Erreur connection BDD (' . $mysqli->connect_errno . ') '. $mysqli->connect_error, E_USER_ERROR);
-        return false;
-    } else {
-        $stmt = $mysqli->prepare("select count(*) as nb_tentatives from connection_errors where ip=?");
-        $stmt->bind_param("s",  $ip);
-        $stmt->execute();
-        $stmt->bind_result($count);
-        $stmt->fetch();
-        if($count > 4) {
-            return true; // cette IP a atteint le nombre maxi de 5 tentatives infructueuses
-        } else {
-            return false;
-        }
-        $mysqli->close();
-    }
-}
 
 /**
  * Récupérer les informations d'utilisateur en sachant son id_user
