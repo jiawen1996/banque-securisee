@@ -146,5 +146,5 @@ Cette procédure est similaire que cela au coté serveur.
    ps：Il faut importer le certificat en format **p12** dans firefox
 
    ```bash
-   openssl pkcs12 -export -clcerts -in sr03.utc.crt -inkey client1.key -		out client.sr03.utc.p12
+   openssl pkcs12 -export -clcerts -in sr03.utc.crt -inkey client1.key -out client.sr03.utc.p12
    ```
